@@ -23,6 +23,14 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<link rel="shortcut icon" href="<?php echo esc_url( get_template_directory_uri() . '/img/tuv2014_favicon.ico'  ); ?>" type="image/x-icon">
 	<link rel='manifest' href="<?php echo esc_url( get_template_directory_uri()) ?>/manifest.json"> -->
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="https://taalunie.org/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://taalunie.org/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://taalunie.org/favicon/favicon-16x16.png">
+	<link rel="mask-icon" href="https://taalunie.org/favicon/safari-pinned-tab.svg" color="#000000">
+	<link rel="shortcut icon" href="https://taalunie.org/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="theme-color" content="#000000">
 	<?php wp_head(); ?>
 </head>
 
