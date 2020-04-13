@@ -1,19 +1,19 @@
 /*!
 Theme Name: onderwijstermen
-Theme URI: https://github.com/thgh/hsn-theme
+Theme URI: https://github.com/thgh/onderwijstermen-theme
 Author: Thomas Ghysels
 Author URI: https://thomasg.be
-Description: Artikels samengevat in bundels voor HSN (Taalunie)
+Description: Overzicht van onderwijstermen (Taalunie)
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
-Text Domain: hsn-theme
+Text Domain: onderwijstermen-theme
 Tags: 
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 
-hsn-theme is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+onderwijstermen-theme is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 
 Normalizing styles have been helped along thanks to the fine work of
@@ -984,6 +984,9 @@ object {
 
 /* HSN util */
 
+.container {
+	max-width: 1100px;
+}
 .embed-container {
 	height: 0;
 	margin-bottom: 18px;
@@ -1020,6 +1023,66 @@ object {
 
 /* HSN Custom */
 
+.post-edit-link {
+	display: block;
+	padding: 1em;
+}
+
+@media (min-width: 768px) {
+	.site-content {
+		background: #f0f0f0;
+	}
+	.content-area {
+		display: flex;
+		justify-content: center;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.site-main {
+		order: 1;
+		padding: 2em 15px;
+		max-width: 784px;
+		width: 100%;
+	}
+	.site-intro,
+	.type-term {
+		border-radius: 8px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		padding: .5em 0 1em;
+		background: white;
+	}
+	.letter:nth-child(14) {
+		clear: both;
+	}
+	.post-edit-link {
+		display: block;
+		margin: 1em 0 -1em;
+		border-top: 1px solid #eee;
+		border-radius: 0 0 8px 8px;
+		padding: 0.5em 15px;
+		background: #f8f8f8;
+	}
+	.post-edit-link:hover {
+		background: #e5e5e5;
+	}
+}
+@media (min-width: 920px) {
+	.site-intro,
+	.type-term {
+		padding: 1em;
+	}
+	.post-edit-link {
+		margin: 1em -1em -1em;
+		padding: 1em 2em;
+	}
+}
+@media (min-width: 1100px) {
+	.site-main {
+		padding-left: 3em;
+		max-width: 784px;
+	}
+}
+
 .btn {
 	display: inline-block;
 	border: 1px solid #ddd;
@@ -1050,13 +1113,20 @@ object {
 	text-indent: 120px;
 }
 
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+}
 h2 {
 	margin: 2em 0;
-	font-size: 1rem;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
 }
 
 .site-content {
-	min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 95px);
 }
 
 .site-footer {
@@ -1103,6 +1173,16 @@ h2 {
 	padding: 1em;
 }
 
+.region {
+	margin-right: 3px;
+  border-radius: 2px;
+  padding: 3px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #24A9C5;
+  background: #E9F6F9;
+}
+
 .icon {
 	display: inline-block;
   vertical-align: middle;
@@ -1119,6 +1199,17 @@ h2 {
 	height: 18px;
 }
 
+.search-icon {
+	z-index: 3;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 42px;
+	height: 42px;
+	padding: 8px;
+	background: #212d4c;
+	pointer-events: none;
+}
 
 
 .error-404 {
@@ -1132,8 +1223,12 @@ h2 {
 
 /* Breadcrumb */
 
+.breadcrumb-border {
+	background: white;
+	border-bottom: 1px solid #eee;
+}
 .breadcrumb {
-	margin: 12px 0;
+	margin: 0;
 	padding: 0;
 	background: none;
 }
@@ -1142,8 +1237,10 @@ h2 {
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
-.breadcrumb-border {
-	border-bottom: 1px solid #eee;
+.breadcrumb-item.active,
+.breadcrumb a {
+	display: inline-block;
+	padding: 1em .5em;
 }
 
 /* Bundel-mini */
@@ -1536,10 +1633,10 @@ a .bundel-mini:focus {
 
 /* widget area*/
 
-.widget-area--search{
-	padding: 3em 0;
+.widget-area--search {
+	padding: 2em 0;
 	min-height: 100vh;
-	background: #eee;
+	background: #f0f0f0;
 }
 .widget_search,
 .widget_search label {
@@ -1583,10 +1680,15 @@ a .bundel-mini:focus {
 .widget-area--search .form-group--20em {
 	width: 20em;
 }
+@media (min-width: 768px) {
+	.widget-area--search {
+		width: 320px;
+	}
+}
 
 .letters {
 	overflow: auto;
-	margin: 0 0 20px -5px;
+	margin: 0 0 1em -5px;
 }
 .letter {
 	float: left;
@@ -1608,27 +1710,28 @@ a .bundel-mini:focus {
 	color: #212d4c;
 }
 
-.termslist {
-	
-}
-
-.termslist a {
-}
 .term-link {
 	display: block;
-	padding: 3px 0;
+	margin: 1px -8px;
+	border-radius: 3px;
+	padding: 3px 8px;
 	color: inherit;
 	text-decoration: none;
 }
 .term-link:visited {
 	color: #999;
 }
-
-/* Detail */
-
-.type-term {
-	margin-bottom: 2em;
-	max-width: 700px;
+.term-link--active {
+	font-weight: bold;
+	background: #dbe8eb;
+	color: inherit!important;
+}
+.term-link:hover {
+	text-decoration: none;
+	background: #dbe8eb;
+}
+.term-link:hover .term-link__term {
+	text-decoration: underline;
 }
 
 /* Detail > labels */
@@ -1746,6 +1849,18 @@ a .bundel-mini:focus {
 	margin-top: 1em;
 	margin-bottom: .5em;
 	font-weight: bold;
+}
+
+.by-eskidoos {
+	padding: 1rem 0;
+	font-size: 13px;
+	background: black;
+	color: white;
+}
+.by-eskidoos a {
+	color: white;
+	font-weight: 600;
+	text-decoration: underline;
 }
 
 /* Vue */

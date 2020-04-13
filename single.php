@@ -8,13 +8,14 @@
  */
 
 get_header();
+$postID = $post->ID;
 $firstLetter = lcfirst(substr($post->post_title, 0, 1));
 $firstLetterUp = ucfirst(substr($post->post_title, 0, 1));
 ?>
 <div class="breadcrumb-border">
   <nav class="container" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<?php echo get_home_url() ?>">Alle termen</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo get_home_url() ?>">Onderwijstermen</a></li>
       <li class="breadcrumb-item"><a href="<?php echo get_home_url() . '?s=' . $firstLetter ?>"><?php echo $firstLetterUp ?></a></li>
       <li class="breadcrumb-item active" aria-current="page"><?php echo $post->post_title ?></li>
     </ol>
@@ -22,7 +23,7 @@ $firstLetterUp = ucfirst(substr($post->post_title, 0, 1));
 </div>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main container">
+		<main id="main" class="site-main">
 
 		<?php
 		while ( have_posts() ) :
@@ -40,5 +41,4 @@ $firstLetterUp = ucfirst(substr($post->post_title, 0, 1));
 		<?php get_sidebar('search'); ?>
 	</div><!-- #primary -->
 <?php
-get_sidebar();
 get_footer();

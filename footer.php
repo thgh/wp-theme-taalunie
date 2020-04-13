@@ -13,32 +13,26 @@
 
 	</div><!-- #content -->
 
-	<div class="container">
-		<h3>Mist u een term?</h3>
-	</div>
-
 	<footer id="colophon" class="site-footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4">
-					<h5 class="mt-0">&copy; Taalunie</h5>
-					Rechten voorbehouden
-				</div>
-				<div class="col-lg-4">
+				<div class="col-md-8">
 					<a class="media" href="http://taalunie.org">
 						<img class="mr-3" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/logo_nu-white.png" alt="">
 						<div class="media-body">
 							<h5 class="mt-0">Taalunie</h5>
-							<?php the_field('about_taalunie', 'option'); ?>
+							<p>
+								De Nederlandse Taalunie is een kennis- en beleidsorganisatie waarin Nederland, Vlaanderen en Suriname samenwerken op het gebied van de Nederlandse taal. De Taalunie draagt zorg voor de beschrijving van de Nederlandse taal en zet zich daarnaast onder meer in voor kwaliteitsvol onderwijs in en van het Nederlands, voor een stevige positie van het Nederlands in de wereld en voor het gebruik van het Nederlands in digitale en niet-digitale contexten.
+							</p>
 						</div>
 					</a>
-					<a style="font-size: 14px;margin-left: 86px;" href="https://twitter.com/taalunie?ref=hsnbundels">
+					<a style="font-size: 14px;margin-left: 86px; color: white;" href="https://twitter.com/taalunie?ref=hsnbundels">
 						<p class="pt-3">
 							<img class="mr-2" style="width:30px" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/twitter-icon.png" alt="">
 							Volg ons op Twitter
 						</p>
 					</a>
-					<a style="font-size: 14px;margin-left: 86px;" href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=hsnbundels">
+					<a style="font-size: 14px;margin-left: 86px; color: white;" href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=hsnbundels">
 						<p>
 							<div class="icon mr-2">
 								<svg viewBox="0 0 24 24">
@@ -49,25 +43,20 @@
 						</p>
 					</a>
 				</div>
-				<div class="col-lg-4">
-					<a class="media" href="https://hsnconferentie.org">
-						<img class="mr-3" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/hsn-logo.png" alt="">
-						<div class="media-body">
-							<h5 class="mt-0">HSN</h5>
-							<?php the_field('about_hsn', 'option'); ?>
-						</div>
-					</a>
-					<a style="font-size: 14px;margin-left: 86px;" href="https://twitter.com/HSNconferentie?ref=hsnbundels">
-						<p class="pt-3">
-							<img class="mr-2" style="width:30px" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/twitter-icon.png" alt="">
-							Volg ons op Twitter
-						</p>
-					</a>
+				<div class="col-md-4">
+					Onze databanken
+					<ul>
+						<li>Onderwijstermenlijst</li>
+						<li>Tijdschriftenattendering</li>
+						<li>HSN bundels</li>
+					</ul>
 				</div>
 			</div>
-			<p style="margin-top: 100px;">Webapplicatie door <a href="https://eskidoos.be">ESKIDOOS</a></p>
 		</div>
 	</footer><!-- #colophon -->
+	<div class="by-eskidoos">
+		<div class="container">Webapplicatie door <a href="https://eskidoos.be">ESKIDOOS.be</a></div>
+	</div>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

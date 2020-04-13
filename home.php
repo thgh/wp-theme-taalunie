@@ -13,11 +13,27 @@
  */
 
 get_header();
+$searchQuery = get_search_query();
 ?>
+<div class="breadcrumb-border">
+  <nav class="container" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="<?php echo get_home_url() ?>">Onderwijstermen</a></li>
+      <?php if ($searchQuery): ?>
+        <li class="breadcrumb-item active" aria-current="page">Zoeken: <?php echo $searchQuery ?></li>
+      <?php endif ?>
+    </ol>
+  </nav>
+</div>
+
   <div id="primary" class="content-area">
-    <main id="main" class="site-main container">
-      <h1>Onderwijstermenlijst</h1>
-      <p>De onderwijstermenlijst bevat verklaringen van een 900-tal onderwijstermen uit <b>Vlaanderen</b>, <b>Nederland</b> en <b>Suriname</b></p>
+    <main id="main" class="site-main">
+      <div class="site-intro">
+        <div class="container">
+          <h1>Onderwijstermenlijst</h1>
+          <p>De onderwijstermenlijst bevat verklaringen van een 900-tal onderwijstermen uit <b>Vlaanderen</b>, <b>Nederland</b> en <b>Suriname</b></p>
+        </div>
+      </div>
     </main><!-- #main -->
 
     <?php get_sidebar('search'); ?>
