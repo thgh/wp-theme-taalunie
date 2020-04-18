@@ -31,7 +31,7 @@ $firstLetterUp = ucfirst(substr($post->post_title, 0, 1));
 
 			get_template_part( 'template-parts/content', get_post_type() );
 
-			the_post_navigation();
+			// the_post_navigation();
 
 		endwhile; // End of the loop.
 		?>
