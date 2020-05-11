@@ -26,13 +26,15 @@
 							</p>
 						</div>
 					</a>
-					<a style="font-size: 14px;margin-left: 86px; color: white;" href="https://twitter.com/taalunie?ref=hsnbundels">
+				</div>
+				<div class="col-md-4">
+					<a style="font-size: 14px; color: white;" href="https://twitter.com/taalunie?ref=hsnbundels">
 						<p class="pt-3">
 							<img class="mr-2" style="width:30px" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/twitter-icon.png" alt="">
 							Volg ons op Twitter
 						</p>
 					</a>
-					<a style="font-size: 14px;margin-left: 86px; color: white;" href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=hsnbundels">
+					<a style="font-size: 14px; color: white;" href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=hsnbundels">
 						<p>
 							<div class="icon mr-2">
 								<svg viewBox="0 0 24 24">
@@ -42,14 +44,6 @@
 							Volg ons op Linkedin
 						</p>
 					</a>
-				</div>
-				<div class="col-md-4">
-					Onze databanken
-					<ul>
-						<li>Onderwijstermenlijst</li>
-						<li>Tijdschriftenattendering</li>
-						<li>HSN bundels</li>
-					</ul>
 				</div>
 			</div>
 		</div>
