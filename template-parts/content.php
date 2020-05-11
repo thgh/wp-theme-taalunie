@@ -30,7 +30,7 @@ $regions = get_the_terms($post->ID, 'region') ?: [];
 		<?php endif; ?>
 
     <?php foreach($regions as $region) { ?>
-      <a href="<?php echo get_home_url() ?>?region=<?php echo $region->slug ?>" class="region"><?php echo $region->name ?></a>
+      <span class="region"><?php echo $region->name ?></span>
     <?php } ?>
 	</header><!-- .entry-header -->
 
