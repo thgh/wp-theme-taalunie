@@ -177,12 +177,9 @@ add_action( 'wp_enqueue_scripts', 'hsn_theme_scripts' );
 /**
  * HSN
  */
-require get_template_directory() . '/inc/onderwijstermen-slug.php';
+// require get_template_directory() . '/inc/onderwijstermen-slug.php';
 require get_template_directory() . '/inc/onderwijstermen-taxonomies.php';
 require get_template_directory() . '/inc/disable-emojis.php';
-// require get_template_directory() . '/inc/hsn-taxonomies.php';
-// require get_template_directory() . '/inc/hsn-migrate.php';
-// require get_template_directory() . '/inc/hsn-ocr.php';
 
 /**
  * Implement the Custom Header feature.
