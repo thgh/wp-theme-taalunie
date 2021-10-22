@@ -1,44 +1,19 @@
 <?php
 // add_filter('show_admin_bar', '__return_false');
-add_action( 'admin_bar_menu', 'remove_wp_nodes', 999 );
+add_action('admin_bar_menu', 'remove_wp_nodes', 999);
 
-function remove_wp_nodes() 
+function remove_wp_nodes()
 {
-    global $wp_admin_bar;   
-    $wp_admin_bar->remove_node( 'new-page' );
-    $wp_admin_bar->remove_node( 'new-post' );
-    $wp_admin_bar->remove_node( 'new-link' );
-    $wp_admin_bar->remove_node( 'new-media' );
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_node('new-page');
+    $wp_admin_bar->remove_node('new-post');
+    $wp_admin_bar->remove_node('new-link');
+    $wp_admin_bar->remove_node('new-media');
 }
 
-if(function_exists('acf_add_options_page')) {
-	acf_add_options_page();
-	acf_add_options_sub_page('Footer');
-}
-
-/**
- * @param int $number
- * @return string
- */
-function roman($number) {
-    $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
-    $returnValue = '';
-    while ($number > 0) {
-        foreach ($map as $roman => $int) {
-            if($number >= $int) {
-                $number -= $int;
-                $returnValue .= $roman;
-                break;
-            }
-        }
-    }
-    return $returnValue;
-}
-function roman2($value, $offset) {
-  if ($value < 1) {
-    return roman(intval($offset) + intval($value));
-  }
-  return $value;
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page();
+    acf_add_options_sub_page('Footer');
 }
 
 /**
@@ -49,81 +24,89 @@ function roman2($value, $offset) {
  * @package onderwijstermen
  */
 
-if ( ! function_exists( 'hsn_theme_setup' ) ) :
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
-	 */
-	function hsn_theme_setup() {
-		/*
-		 * Make theme available for translation.
-		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on hsn-theme, use a find and replace
-		 * to change 'hsn-theme' to the name of your theme in all the template files.
-		 */
-		load_theme_textdomain( 'hsn-theme', get_template_directory() . '/languages' );
+if (!defined('hsn_theme_VERSION')) {
+    // Replace the version number of the theme on each release.
+    define('hsn_theme_VERSION', '1.0.0');
+}
 
-		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links' );
+if (!function_exists('hsn_theme_setup')):
+    /**
+     * Sets up theme defaults and registers support for various WordPress features.
+     *
+     * Note that this function is hooked into the after_setup_theme hook, which
+     * runs before the init hook. The init hook is too late for some features, such
+     * as indicating support for post thumbnails.
+     */
+    function hsn_theme_setup()
+{
+        /*
+         * Make theme available for translation.
+         * Translations can be filed in the /languages/ directory.
+         * If you're building a theme based on hsn-theme, use a find and replace
+         * to change 'hsn-theme' to the name of your theme in all the template files.
+         */
+        load_theme_textdomain('hsn-theme', get_template_directory() . '/languages');
 
-		/*
-		 * Let WordPress manage the document title.
-		 * By adding theme support, we declare that this theme does not use a
-		 * hard-coded <title> tag in the document head, and expect WordPress to
-		 * provide it for us.
-		 */
-		add_theme_support( 'title-tag' );
+        // Add default posts and comments RSS feed links to head.
+        add_theme_support('automatic-feed-links');
 
-		/*
-		 * Enable support for Post Thumbnails on posts and pages.
-		 *
-		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		 */
-		add_theme_support( 'post-thumbnails' );
+        /*
+         * Let WordPress manage the document title.
+         * By adding theme support, we declare that this theme does not use a
+         * hard-coded <title> tag in the document head, and expect WordPress to
+         * provide it for us.
+         */
+        add_theme_support('title-tag');
 
-		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'hsn-theme' ),
-		) );
+        /*
+         * Enable support for Post Thumbnails on posts and pages.
+         *
+         * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+         */
+        add_theme_support('post-thumbnails');
 
-		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
-		add_theme_support( 'html5', array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-		) );
+        // This theme uses wp_nav_menu() in one location.
+        register_nav_menus(array(
+            'menu-1' => esc_html__('Primary', 'hsn-theme'),
+        ));
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'hsn_theme_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
+        /*
+         * Switch default core markup for search form, comment form, and comments
+         * to output valid HTML5.
+         */
+        add_theme_support('html5', array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'style',
+            'script',
+        ));
 
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
+        // Set up the WordPress core custom background feature.
+        add_theme_support('custom-background', apply_filters('hsn_theme_custom_background_args', array(
+            'default-color' => 'ffffff',
+            'default-image' => '',
+        )));
 
-		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
-		add_theme_support( 'custom-logo', array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		) );
-	}
+        // Add theme support for selective refresh for widgets.
+        add_theme_support('customize-selective-refresh-widgets');
+
+        /**
+         * Add support for core custom logo.
+         *
+         * @link https://codex.wordpress.org/Theme_Logo
+         */
+        add_theme_support('custom-logo', array(
+            'height' => 250,
+            'width' => 250,
+            'flex-width' => true,
+            'flex-height' => true,
+        ));
+    }
 endif;
-add_action( 'after_setup_theme', 'hsn_theme_setup' );
+add_action('after_setup_theme', 'hsn_theme_setup');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -132,52 +115,50 @@ add_action( 'after_setup_theme', 'hsn_theme_setup' );
  *
  * @global int $content_width
  */
-function hsn_theme_content_width() {
-	// This variable is intended to be overruled from themes.
-	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
-	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'hsn_theme_content_width', 640 );
+function hsn_theme_content_width()
+{
+    $GLOBALS['content_width'] = apply_filters('hsn_theme_content_width', 640);
 }
-add_action( 'after_setup_theme', 'hsn_theme_content_width', 0 );
+add_action('after_setup_theme', 'hsn_theme_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function hsn_theme_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'hsn-theme' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'hsn-theme' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+function hsn_theme_widgets_init()
+{
+    register_sidebar(array(
+        'name' => esc_html__('Sidebar', 'hsn-theme'),
+        'id' => 'sidebar-1',
+        'description' => esc_html__('Add widgets here.', 'hsn-theme'),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget' => '</section>',
+        'before_title' => '<h2 class="widget-title">',
+        'after_title' => '</h2>',
+    ));
 }
-add_action( 'widgets_init', 'hsn_theme_widgets_init' );
+add_action('widgets_init', 'hsn_theme_widgets_init');
 
 /**
  * Enqueue scripts and styles.
  */
-function hsn_theme_scripts() {
-	wp_enqueue_style( 'hsn-theme-style', get_stylesheet_uri() );
+function hsn_theme_scripts()
+{
+    wp_enqueue_style('hsn_theme-style', get_stylesheet_uri(), array(), hsn_theme_VERSION);
+    wp_style_add_data('hsn_theme-style', 'rtl', 'replace');
 
-	wp_enqueue_script( 'hsn-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+    wp_enqueue_script('hsn_theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), hsn_theme_VERSION, true);
 
-	wp_enqueue_script( 'hsn-theme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
+    }
 }
-add_action( 'wp_enqueue_scripts', 'hsn_theme_scripts' );
+add_action('wp_enqueue_scripts', 'hsn_theme_scripts');
 
 /**
  * HSN
  */
-// require get_template_directory() . '/inc/onderwijstermen-slug.php';
 require get_template_directory() . '/inc/onderwijstermen-taxonomies.php';
 require get_template_directory() . '/inc/disable-emojis.php';
 
@@ -204,7 +185,6 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Load Jetpack compatibility file.
  */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+if (defined('JETPACK__VERSION')) {
+    require get_template_directory() . '/inc/jetpack.php';
 }
-
