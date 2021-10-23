@@ -73,7 +73,7 @@ msgstr ""
 
 #: header.php:45
 msgid "Primary Menu"
-msgstr ""
+msgstr "Menu uitklappen"
 
 #: inc/template-tags.php:52
 #. translators: used between list items, there is a space after the comma
@@ -98,7 +98,7 @@ msgstr ""
 #: inc/template-tags.php:89 template-parts/content-page.php:35
 #. translators: %s: Name of current post. Only visible to screen readers
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
+msgstr "Bewerk"
 
 #: search.php:21
 #. translators: %s: search query.

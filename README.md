@@ -1,4 +1,3 @@
-onderwijstermen-theme
-===
+# nt2-beginnersdoelen-theme
 
-Wordpress thema voor onderwijstermen
+Wordpress thema voor Taalunie NT2-Beginnersdoelen

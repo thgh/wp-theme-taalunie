@@ -53,9 +53,9 @@
 	</div>
 </div><!-- #page -->
 
-<?php wp_footer(); ?>
+<?php wp_footer();?>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172169241-1"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172169241-1" data-no-instant></script> -->
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }

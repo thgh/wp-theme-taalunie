@@ -22,8 +22,8 @@ function cptui_register_custom_post_types()
             'singular_name' => __('Taak', 'taalunie'),
             'menu_name' => __('Taken', 'taalunie'),
             'name_admin_bar' => __('Taken', 'taalunie'),
-         ],
-        'supports' => ['title', 'editor', 'thumbnail'],
+        ],
+        'supports' => ['title', 'editor', 'author', 'thumbnail'],
         'hierarchical' => true,
         'description' => 'Lesactiviteiten / taken',
         'public' => true,
@@ -34,10 +34,7 @@ function cptui_register_custom_post_types()
         'rewrite' => ['slug' => 'taak'],
         'capability_type' => 'post',
         'has_archive' => true,
-        'hierarchical' => false,
         'menu_position' => 20,
-        'supports' => ['title', 'editor', 'author', 'thumbnail'],
-        'taxonomies' => ['category', 'post_tag'],
         'show_in_rest' => true,
     ]);
 }

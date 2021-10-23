@@ -4,14 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package onderwijstermen
+ * @package _s
  */
-
-$regions = get_the_terms($post->ID, 'region') ?: [];
 ?>
 
 <article id="post-<?php the_ID();?>" <?php post_class();?>>
-	<header class="entry-header container">
+	<header class="entry-header">
 		<?php
 if (is_singular()):
     the_title('<h1 class="entry-title">', '</h1>');
@@ -32,7 +30,7 @@ hsn_theme_posted_by();
 
 	<?php hsn_theme_post_thumbnail();?>
 
-	<div class="entry-content container">
+	<div class="entry-content">
 		<?php
 the_content(sprintf(
     wp_kses(
@@ -57,4 +55,22 @@ wp_link_pages(array(
 	<footer class="entry-footer">
 		<?php hsn_theme_entry_footer();?>
 	</footer><!-- .entry-footer -->
-</article><!-- #post-<?php the_ID();?> -->
+
+  <dl class="dl-horizontal entry-terms">
+<?php
+$terms = wp_get_object_terms(get_the_ID(), get_object_taxonomies('taak'));
+$taxonomies = [];
+foreach ($terms as $term) {
+    $taxonomies[$term->taxonomy][] = $term->name;
+}
+ksort($taxonomies);
+foreach ($taxonomies as $taxonomy => $terms) {
+    echo '<dt>' . ucfirst($taxonomy) . '</dt>';
+    foreach ($terms as $term):
+        echo '<dd>' . ($term) . '</dd>';
+    endforeach;
+}
+?>
+</dl>
+
+</article>
