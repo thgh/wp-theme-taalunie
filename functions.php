@@ -156,6 +156,19 @@ function hsn_theme_scripts()
 }
 add_action('wp_enqueue_scripts', 'hsn_theme_scripts');
 
+add_action('pre_get_posts', 'taak_query_sort_asc');
+function taak_query_sort_asc($query)
+{
+    if (isset($query->query['post_type']) && $query->query['post_type'] === 'taak') {
+        $query->set('order', 'ASC');
+        $query->set('posts_per_page', 30);
+    }
+    if (isset($query->query['post_types']) && $query->query['post_types'] === 'taak') {
+        $query->set('order', 'ASC');
+        $query->set('posts_per_page', 30);
+    }
+};
+
 /**
  * HSN
  */
