@@ -62,5 +62,25 @@ function gtag() { dataLayer.push(arguments); }
 gtag('js', new Date());
 gtag('config', 'UA-172169241-1', {'anonymize_ip': true});
 </script>
+
+<script defer>
+;(() => {
+  window.addEventListener('keyup', (evt) => {
+    switch (evt.key) {
+      case 'ArrowLeft':
+        var prev = document.querySelector('.nav-previous a[rel=prev]')
+        prev && prev.click()
+        break
+      case 'ArrowRight':
+        var next = document.querySelector('.nav-next a[rel=next]')
+        if (next) next.click()
+        else {
+          var first = document.querySelector('a.mini-taak')
+          if (first) first.click()
+        }
+    }
+  })
+})()
+</script>
 </body>
 </html>
