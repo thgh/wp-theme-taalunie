@@ -1305,15 +1305,16 @@ object {
   }
   .site-intro {
     margin: 0 0 2em;
+    padding-top: 2em;
   }
   .searchandfilter li {
     flex-basis: 20%;
   }
 }
 @media (min-width: 920px) {
-  .site-intro,
-  .type-term {
+  .site-intro {
     padding: 15px;
+    padding-top: 2em;
   }
   .searchandfilter li {
     flex-basis: 0;
