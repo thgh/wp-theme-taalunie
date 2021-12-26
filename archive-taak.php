@@ -28,20 +28,26 @@ get_header();
       <div class="col col-12 order-2 order-sm-1">
         <?php get_template_part('template-parts/filter', 'taak');?>
       </div>
-      <div class="col order-3 order-sm-2">
+      <div class="col col-md-5 order-3 order-sm-2">
           <?php
 if (have_posts()):
+    $page_index = ($wp_query->query_vars['paged'] ?: 1) - 1;
+    $page_size = $wp_query->query_vars['posts_per_page'];
+    $post_index = $page_index * $page_size;
     while (have_posts()):
         the_post();
         get_template_part('template-parts/content', 'mini-taak');
     endwhile;
-    the_posts_navigation();
+    the_posts_navigation([
+      'prev_text' => 'Volgende taken',
+      'next_text' => 'Vorige taken',
+    ]);
 else:
     get_template_part('template-parts/content', 'none');
 endif;
 ?>
       </div>
-      <div class="col order-1 order-sm-3">
+      <div class="col col-md-7 order-1 order-sm-3">
         <div class="site-intro">
           <div class="container">
             <h1>Lesactiviteiten</h1>

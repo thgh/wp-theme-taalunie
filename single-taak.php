@@ -29,19 +29,29 @@ get_header();
       <div class="col col-12 order-2 order-sm-1">
         <?php get_template_part('template-parts/filter', 'taak');?>
       </div>
-      <div class="col order-3 order-sm-2">
+      <div class="col col-md-5 order-3 order-sm-2">
       <?php
 /* Start the Loop */
 $parent_posts = new WP_Query(['posts_per_page' => 30, 'post_type' => 'taak']);
+$page_index = ($parent_posts->query_vars['paged'] ?: 1) - 1;
+$page_size = $parent_posts->query_vars['posts_per_page'];
+$post_index = $page_index * $page_size;
 while ($parent_posts->have_posts()):
     $parent_posts->the_post();
     get_template_part('template-parts/content', 'mini-taak');
 endwhile;
+// $original_query = $wp_query;
+// $wp_query = $parent_posts
+// the_posts_navigation([
+//   'prev_text' => 'Volgende taken',
+//   'next_text' => 'Vorige taken',
+// ]);
+// $wp_query = $original_query;
 
 wp_reset_postdata();
 ?>
       </div>
-      <div class="col order-1 order-sm-3">
+      <div class="col col-md-7 order-1 order-sm-3">
           <?php
 while (have_posts()):
     the_post();
