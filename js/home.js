@@ -29,6 +29,14 @@ new Vue({
       return this.mainCategories.filter((c) => c.id !== this.category.id)
     },
     category() {
+      setTimeout(() => {
+        if (
+          this.categories.length &&
+          !this.categories.find((c) => c.slug === this.categorySlug)
+        ) {
+          this.categorySlug = ''
+        }
+      }, 500)
       return this.categories.find((c) => c.slug === this.categorySlug)
     },
     categoryGoals() {

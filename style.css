@@ -1468,6 +1468,20 @@ html {
   background-color: #b1ffee;
 }
 
+.goal-add {
+  margin-left: 1.5em;
+  line-height: 36px;
+  font-size: 15px;
+  text-transform: uppercase;
+  background: #00b0ca;
+  color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 0 1.5em;
+  transition: transform 0.2s;
+}
+
 .flip-list-move {
   transition: transform 0.5s;
 }
