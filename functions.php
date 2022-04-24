@@ -21,7 +21,7 @@ if (function_exists('acf_add_options_page')) {
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 if (!defined('hsn_theme_VERSION')) {

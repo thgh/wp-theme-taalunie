@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 if ( ! function_exists( 'hsn_theme_posted_on' ) ) :

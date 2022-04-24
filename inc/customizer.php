@@ -2,7 +2,7 @@
 /**
  * hsn-theme Theme Customizer
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 /**

@@ -9,9 +9,10 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
+$suppress_nav_menu = true;
 get_header();
 ?>
 <div id="app" class="site-content__background">
@@ -62,7 +63,7 @@ get_header();
   <div v-else-if="!category" v-cloak class="container">
     <h1>Bezig...</h1>
   </div>
-  <div v-else v-cloak>
+  <div v-else-if="!step || step === 'sorting'" v-cloak>
     <button class="selection" v-if="selection.length" @click.prevent="next">
       <div class="container">
         <div class="d-flex align-items-center">
@@ -77,7 +78,7 @@ get_header();
     </button>
 
     <!-- Selecting goals -->
-    <div class="container pb-4" v-if="!sorting">
+    <div class="container pb-4" v-if="step !== 'sorting'">
       <h1 class="mb-2">{{category.name}}</h1>
 
       <p class="mb-3" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
@@ -171,6 +172,57 @@ get_header();
         </div>
       </div>
     </div>
+
+    <!-- Failed to load vue-draggable -->
+    <div v-else>
+      Probleem bij het laden van de sorteringsmodule
+    </div>
+  </div>
+  <div v-else-if="step==='linking'" v-cloak>
+    <button class="selection" v-if="selection.length" @click.prevent="next">
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            {{selection.length}} {{selection.length===1?'doel':'doelen'}} geselecteerd
+          </div>
+          <div class="selection__next">
+            Volgende
+          </div>
+        </div>
+      </div>
+    </button>
+    <div class="modal-body">
+      <div class="modal-options">
+        <a class="modal-option" :href="back()" @click="visit">
+          <div class="modal-option__img">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-plus">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div class="modal-option__text">
+            Ik wil andere domeinen toevoegen.
+          </div>
+        </a>
+        <button class="modal-option" @click="finish">
+          <div class="modal-option__img">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+              stroke="#08B589" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-check">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="modal-option__text">
+            Ik ben klaar met kiezen en wil afronden.
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    Step={{step}}
   </div>
 </div>
 

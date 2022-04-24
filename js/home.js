@@ -9,12 +9,12 @@ new Vue({
       p: url.searchParams.get('p') || '',
       region: url.searchParams.get('region') || '',
       categorySlug: url.searchParams.get('category') || '',
+      step: url.searchParams.get('step') || '',
       categoriesPromise: null,
       allGoalsPromise: null,
       allGoals: stale('allGoals') || [],
       categories: stale('categories') || [],
       selection: stale('selection') || [],
-      sorting: url.searchParams.get('step') === 'sorting',
       draggable: false,
       drag: false,
       title: '',
@@ -84,6 +84,13 @@ new Vue({
       this.allGoals = await this.allGoalsPromise
       persist('allGoals', this.allGoals)
     },
+    back() {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('category')
+      url.searchParams.delete('step')
+      url.hash = ''
+      return url.toString()
+    },
     slugify(category) {
       const url = new URL(window.location.href)
       url.searchParams.set('category', category.slug)
@@ -99,7 +106,7 @@ new Vue({
       this.p = url.searchParams.get('p') || ''
       this.region = url.searchParams.get('region') || ''
       this.categorySlug = url.searchParams.get('category') || ''
-      this.sorting = url.searchParams.get('step') === 'sorting'
+      this.step = url.searchParams.get('step') || ''
       document.body.scrollIntoView()
 
       if (!back) window.history.pushState({}, '', url)
@@ -117,12 +124,42 @@ new Vue({
         })
     },
     next() {
-      if (!this.sorting) {
+      if (!this.step) {
         const url = new URL(window.location.href)
         url.searchParams.set('step', 'sorting')
         url.hash = ''
         this.visitURL(url)
         return
+      }
+      if (this.step === 'sorting') {
+        const url = new URL(window.location.href)
+        url.searchParams.set('step', 'linking')
+        url.hash = ''
+        this.visitURL(url)
+        return
+      }
+    },
+    async finish() {
+      if (this.saving) return
+      this.saving = true
+      try {
+        const ok = await wpFetch('/wp-json/anonymous-storage/v1/item', {
+          method: 'POST',
+          body: JSON.stringify({
+            author: this.author || prompt('Wat is jouw naam?') || 'Anoniem',
+            selection: this.selection,
+          }),
+        })
+        this.saving = false
+
+        console.log('ok', ok)
+        localStorage.selection = null
+        window.location.href =
+          '/mijn-doelen?' +
+          serialize({ readkey: ok.readkey, writekey: ok.writekey })
+      } catch (error) {
+        this.saving = false
+        alert('Jouw doelen zijn NIET bewaard. ' + error.message)
       }
     },
 
@@ -185,9 +222,9 @@ function stale(key) {
   } catch (error) {}
 }
 
-function wpFetch(url) {
+function wpFetch(url, options) {
   let res
-  return fetch(window.restUrl + url.replace('/wp-json', '').slice(1))
+  return fetch(window.restUrl + url.replace('/wp-json', '').slice(1), options)
     .then((r) => {
       res = r
       return r.json()

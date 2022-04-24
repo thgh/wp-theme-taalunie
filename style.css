@@ -1232,11 +1232,6 @@ object {
 
 /* HSN Custom */
 
-/* No nav on homepage */
-.home #page .main-navigation {
-  display: none;
-}
-
 html {
   scroll-padding-top: 5rem;
   scroll-behavior: smooth;
@@ -1470,7 +1465,7 @@ html {
 
 .goal-add {
   margin-left: 1.5em;
-  line-height: 36px;
+  line-height: 20px;
   font-size: 15px;
   text-transform: uppercase;
   background: #00b0ca;
@@ -1478,7 +1473,7 @@ html {
   border: none;
   font-weight: 600;
   border-radius: 30px;
-  padding: 0 1.5em;
+  padding: 8px 1.5em;
   transition: transform 0.2s;
 }
 
@@ -1498,6 +1493,98 @@ html {
 }
 .goal-group {
   cursor: move;
+}
+
+.goal-card__icon {
+  width: 24px;
+  margin-right: 30px;
+}
+.container--tight {
+  max-width: 750px;
+}
+.bookmark-alert {
+  background-color: rgba(8, 35, 78, 0.2);
+  border-radius: 30px;
+  padding: 4px 30px;
+  margin: 5px;
+}
+
+.scoring {
+  display: flex;
+}
+.scoring.readonly {
+  pointer-events: none;
+}
+.scoring__star {
+  margin: -12px 0;
+  padding: 0 3px;
+  border: none;
+  background: none;
+}
+.scoring__star > svg {
+  display: block;
+  fill: white;
+  stroke: #ccc;
+  width: 21px;
+  height: 21px;
+}
+.scoring__star.active > svg,
+.scoring__star:hover > svg,
+.scoring:hover > .scoring__star > svg {
+  fill: #ffcb3f;
+  stroke: #dfa300;
+}
+.scoring__star:hover ~ .scoring__star > svg {
+  fill: white !important;
+  stroke: #ccc !important;
+}
+
+@media screen and (max-width: 450px) {
+  .goal-card__icon {
+    display: none;
+  }
+  .scoring {
+    margin-right: -10px;
+  }
+  .scoring__star {
+    padding: 0 1px;
+  }
+  .scoring__star > svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+@media print {
+  .goal-card {
+    background: none;
+    margin: 0;
+    padding: 6px 0 !important;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none !important;
+  }
+  .goal-card__title {
+    font-weight: normal;
+  }
+  .goal-card__content {
+    padding-left: 0;
+    color: black;
+  }
+  .content-background {
+    min-height: 0;
+  }
+  .container--tight,
+  .container {
+    padding: 0 !important;
+    max-width: 100%;
+  }
+  .scoring__star > svg {
+    fill: white !important;
+    stroke: #ccc !important;
+  }
+  .scoring__star.active > svg {
+    fill: #ccc !important;
+    stroke: #888 !important;
+  }
 }
 
 /* Taalunie > Site intro card */
@@ -1648,6 +1735,15 @@ h2 {
   background-color: #eaf2f6;
 }
 
+@media print {
+  .site-content,
+  .site-content__background {
+    padding-top: 0;
+    min-height: auto;
+    background: none;
+  }
+}
+
 .modal-body {
   background: #fff;
   box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
@@ -1655,14 +1751,15 @@ h2 {
 }
 .modal-options {
   display: flex;
-  margin: -8px;
+  margin: -16px;
 }
 
 .modal-option {
   flex: 1;
-  margin: 8px;
+  margin: 16px;
   aspect-ratio: 1/1;
-  outline: 1px solid #979797;
+  outline: 1px solid #ccc;
+  border-radius: 6px;
   text-align: center;
   font-weight: 600;
   display: flex;
@@ -1675,13 +1772,18 @@ h2 {
 }
 .modal-option__text {
   flex: 1;
+  padding: 0 1em;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 1.2em;
+  line-height: 1.25em;
 }
 .modal-option__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 112px;
   width: 100%;
   object-position: center;

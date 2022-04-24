@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 $regions = get_the_terms($post->ID, 'region') ?: [];

@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 $meta = get_post_meta($post->ID);

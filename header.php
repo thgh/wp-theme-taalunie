@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 
 ?>
@@ -56,7 +56,7 @@ else:
 endif;?>
 			</div><!-- .site-branding -->
 		</div><!-- .container -->
-
+		<?php if (isset($suppress_nav_menu)):?>
 		<nav id="site-navigation" class="main-navigation">
 			<div class="container">
 				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Menu', 'hsn-theme');?></button>
@@ -68,6 +68,7 @@ wp_nav_menu(array(
 ?>
 			</div>
 		</nav><!-- #site-navigation -->
+		<?php endif ?>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

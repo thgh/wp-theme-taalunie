@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package onderwijstermen
+ * @package taalunie
  */
 global $parent;
 $author = get_post_meta($post->ID, 'auteur', true);
