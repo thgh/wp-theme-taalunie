@@ -13,39 +13,173 @@
  */
 
 get_header();
-$searchQuery = get_search_query();
 ?>
-<div class="breadcrumb-border">
-  <nav class="container" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<?php echo get_home_url() ?>">Onderwijstermen</a></li>
-      <?php if ($searchQuery): ?>
-        <li class="breadcrumb-item active" aria-current="page">Zoeken: <?php echo $searchQuery ?></li>
-      <?php endif ?>
-    </ol>
-  </nav>
-</div>
-
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main">
-      <div class="site-intro">
-        <div class="container">
-          <h1>Onderwijstermenlijst</h1>
-          <p>De onderwijstermenlijst bevat verklaringen van een 900-tal onderwijstermen uit <b>Vlaanderen</b>, <b>Nederland</b> en <b>Suriname</b></p>
+<div id="app" class="site-content__background">
+  <div class="modal-body" v-if="!p" <?php echo isset($_GET['p']) ? ' v-cloak': '' ?>>
+    <div class="modal-options">
+      <a class="modal-option" href="/?p=leren" @click="visit">
+        <div class="modal-option__text">
+          Ik leer Nederlands.
+        </div>
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+          alt="">
+      </a>
+      <a class="modal-option" href="/begeleider">
+        <div class="modal-option__text">
+          Ik ben begeleider.
+        </div>
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+          alt="">
+      </a>
+    </div>
+  </div>
+  <div class="modal-body" v-else-if="!region" v-cloak>
+    <div class="modal-options">
+      <a class="modal-option" href="/?p=leren&region=nl" @click="visit">
+        <div class="modal-option__text">
+          Ik woon in Nederland.
+        </div>
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+          alt="">
+      </a>
+      <a class="modal-option" href="/?p=leren&region=be" @click="visit">
+        <div class="modal-option__text">
+          Ik woon in België.
+        </div>
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+          alt="">
+      </a>
+    </div>
+  </div>
+  <div v-else-if="!categorySlug" v-cloak class="container">
+    <h1>Ik wil leren over</h1>
+    <div class="categories categories--main">
+      <a class="category-card" v-for="category of mainCategories" :href="slugify(category)" @click="visit">
+        {{category.name}}
+      </a>
+    </div>
+  </div>
+  <div v-else-if="!category" v-cloak class="container">
+    <h1>Bezig...</h1>
+  </div>
+  <div v-else v-cloak>
+    <button class="selection" v-if="selection.length" @click.prevent="next">
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            {{selection.length}} {{selection.length===1?'doel':'doelen'}} geselecteerd
+          </div>
+          <div class="selection__next">
+            Volgende
+          </div>
         </div>
       </div>
-    </main><!-- #main -->
+    </button>
 
-    <?php get_sidebar('search'); ?>
-  </div><!-- #primary -->
+    <!-- Selecting goals -->
+    <div class="container pb-4" v-if="!sorting">
+      <h1 class="mb-2">{{category.name}}</h1>
+
+      <p class="mb-3" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
+
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div v-for="child in categoryChildren">
+            <h3 class="nav-category">
+              <a :href="'#' + child.slug">{{child.name}}</a>
+            </h3>
+            <ul class="nav-subcategories">
+              <li v-for="grandchild in child.children" class="nav-subcategory">
+                <a :href="'#' + grandchild.slug">{{grandchild.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8 mt-1">
+          <label class="goal-card" v-for="goal of categoryGoals">
+            <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+            {{goal.title.rendered}}
+          </label>
+
+          <div class="category-section" v-for="child in categoryChildren" :id="child.slug">
+            <!-- <h3 class="category-section-title">{{child.name}}</h3> -->
+            <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of child.goals">
+              <div class="goal-card__title">
+                <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+                {{goal.title.rendered}}
+              </div>
+              <div class="goal-card__content" v-if="goal.content.rendered" v-html="goal.content.rendered">
+              </div>
+            </label>
+
+            <div class="category-section" v-for="grandchild in child.children" :id="grandchild.slug">
+              <h3 class="category-section-subtitle">{{grandchild.name}}</h3>
+              <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of grandchild.goals">
+                <div class="goal-card__title">
+                  <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+                  {{goal.title.rendered}}
+                </div>
+                <div class="goal-card__content" v-if="goal.content.rendered" v-html="goal.content.rendered">
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h1>Andere domeinen</h1>
+      <div class="categories categories--main mb-4">
+        <a class="category-card" v-for="category of otherCategories" :href="slugify(category)" @click="visit">
+          {{category.name}}
+        </a>
+      </div>
+    </div>
+
+    <!-- Sorting goals -->
+    <div class="container pb-4" v-else-if="draggable===2">
+
+      <h1 class="mb-2">Jouw doelen</h1>
+      <p style="font-size:18px">Wat vind je het belangrijkste? Verander de volgorde van jouw doelen.</p>
+
+      <div class="row">
+        <div class="col-md-8">
+          <draggable tag="div" class="goal-group" v-model="selection" @start="drag=true" @end="drag=false"
+            v-bind="{animation:400}">
+            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+              <div class="goal-card checked" v-for="goal of selection" :key="goal.id">
+                <div class="goal-card__title">
+                  <div class="goal-handle">=</div>
+                  {{goal.title}}
+                </div>
+                <div class="goal-card__content" v-if="goal.content" v-html="goal.content"></div>
+              </div>
+            </transition-group>
+          </draggable>
+
+          <h3 class="category-section-subtitle"> Wil je nog een eigen doel toevoegen? </h3>
+
+          <form class="goal-card checked" @submit.prevent="add(title)">
+            <div class="goal-card__title">
+              <div class="goal-handle"></div>
+              <input type="text" placeholder="Ik kan..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
+              <button type="submit">Voeg toe</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4 d-none d-md-block">
+          <img loading="lazy" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
 </script>
 <?php
-// wp_register_script('vue', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', []);
-// wp_register_script('taxonomies-filter', get_template_directory_uri() . '/js/taxonomies.js', ['vue'], '1');
-// wp_enqueue_script('taxonomies-filter');
+wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.js', []);
+wp_register_script('home-custom', get_template_directory_uri() . '/js/home.js', ['vue'], '1');
+wp_enqueue_script('home-custom');
 
 get_footer();
-

@@ -70,7 +70,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
   font-style: normal;
 }
 @font-face {
-  font-family: 'Kievit';
+  font-family: 'Kievit Caps';
   src: url('./font/kievitscoffc-ita-webfont.eot');
   src: url('./font/kievitscoffc-ita-webfont.eot?#iefix')
       format('embedded-opentype'),
@@ -1232,6 +1232,260 @@ object {
 
 /* HSN Custom */
 
+/* No nav on homepage */
+.home #page .main-navigation {
+  display: none;
+}
+
+html {
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
+}
+
+.selection {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  background: #08b589;
+  color: white;
+  border: 0;
+  border-radius: 0;
+  width: 100%;
+  display: flex;
+  appearance: none;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2em;
+  padding: 0.7em 0;
+}
+
+.selection__next {
+  line-height: 36px;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #00b0ca;
+  background: white;
+  border-radius: 30px;
+  padding: 0 1em;
+  transition: transform 0.2s;
+}
+.selection:hover .selection__next {
+  transform: scale(1.1);
+}
+.selection:focus-visible {
+  outline: none;
+}
+.selection:focus-visible .selection__next {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -8px;
+}
+.category-card {
+  flex-basis: 40%;
+  flex-grow: 1;
+  padding: 16px;
+  margin: 8px;
+  color: #182b49 !important;
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+  border-top: 140px solid #d8e5ef;
+  background: white;
+  box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+}
+@media (min-width: 576px) {
+  .categories {
+    margin: -10px;
+  }
+  .category-card {
+    margin: 10px;
+    flex-basis: 30%;
+  }
+}
+@media (min-width: 768px) {
+  .selection {
+    font-size: 24px;
+  }
+  .categories {
+    margin: -12px;
+  }
+  .category-card {
+    margin: 12px;
+    flex-basis: 21%;
+  }
+}
+@media (min-width: 920px) {
+  .category-card {
+    flex-basis: 17%;
+  }
+}
+
+.nav-category {
+  font: inherit;
+  color: inherit;
+  margin-bottom: 0;
+}
+.nav-category > a {
+  display: block;
+  padding: 4px 0;
+  font: inherit;
+  color: inherit;
+}
+.nav-category > a:hover {
+  color: #56af89;
+}
+.nav-subcategories {
+  font: inherit;
+  color: inherit;
+  margin: 0 0 10px;
+  padding-left: 24px;
+}
+.nav-subcategory {
+  list-style: none;
+}
+.nav-subcategory > a {
+  display: block;
+  padding: 4px 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+}
+.nav-subcategory > a:hover {
+  color: #56af89;
+}
+
+.category-section-title {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: rgba(24, 43, 73, 0.5);
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  display: inline-block;
+  padding: 0 5px;
+  margin: 0 -5px;
+  background: #ebf2f7;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ebf2f7, 0 0 5px #ebf2f7, 0 0 5px #ebf2f7;
+}
+.category-section-subtitle {
+  font-weight: bold;
+  font-size: 20px;
+  color: #182b49;
+  margin-bottom: 20px;
+}
+
+.goal-card {
+  display: block;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 1px -15px;
+  padding: 14px 16px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.goal-card:last-child {
+  margin-bottom: 30px;
+}
+.goal-card__title {
+  display: flex;
+  font-weight: 600;
+  line-height: 24px;
+}
+.goal-card__content {
+  padding-left: 40px;
+  color: #00b0ca;
+  line-height: 20px;
+  font-style: italic;
+}
+.goal-card__content p:last-child {
+  margin-bottom: 0;
+}
+.goal-card [type='checkbox'] {
+  display: block;
+  padding: 0;
+  margin-right: 16px;
+  height: 24px;
+  width: 24px;
+  border-radius: 3px;
+  appearance: none;
+  background-color: white;
+  border: 1px solid #dadada;
+}
+.goal-card:hover [type='checkbox'] {
+  border-color: #666;
+}
+
+@media (min-width: 550px) {
+  .goal-card {
+    margin: 1px 0;
+  }
+}
+
+@media (min-width: 920px) {
+  .goal-card {
+    padding: 18px 18px 18px 30px;
+  }
+  .goal-card [type='checkbox'] {
+    margin-right: 30px;
+  }
+  .goal-card__content {
+    padding-left: 54px;
+  }
+}
+
+.goal-card.checked {
+  background: #fff;
+  box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+}
+.goal-card [type='checkbox']:checked {
+  border-color: #ace7d8;
+  background-color: #f6fffd;
+}
+.goal-card [type='checkbox']:checked::after {
+  content: '\2713';
+  font-size: 24px;
+  line-height: 24px;
+  color: #08b589;
+}
+
+.goal-card.flip-list-move {
+  transition: transform 0.5s;
+}
+.goal-card.sortable-chosen {
+  background-color: #b1ffee;
+}
+.goal-card.sortable-ghost {
+  /* opacity: 0.25 !important; */
+  background-color: #b1ffee;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.goal-handle {
+  cursor: pointer;
+  text-align: center;
+  width: 24px;
+  transform: scaleX(2);
+  font-size: 24px;
+  margin-right: 30px;
+}
+.goal-group {
+  cursor: move;
+}
+
 /* Taalunie > Site intro card */
 
 .site-intro {
@@ -1373,6 +1627,60 @@ h2 {
 
 .site-content {
   min-height: calc(100vh - 95px);
+}
+.site-content__background {
+  padding-top: 1px;
+  min-height: calc(100vh - 95px);
+  background-color: #eaf2f6;
+}
+
+.modal-body {
+  background: #fff;
+  box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+  padding: 16px;
+}
+.modal-options {
+  display: flex;
+  margin: -8px;
+}
+
+.modal-option {
+  flex: 1;
+  margin: 8px;
+  aspect-ratio: 1/1;
+  outline: 1px solid #979797;
+  text-align: center;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  color: inherit !important;
+  text-decoration: inherit;
+}
+.modal-option:hover {
+  outline: 1px solid #000;
+}
+.modal-option__text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.modal-option__img {
+  height: 112px;
+  width: 100%;
+  object-position: center;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 580px) {
+  .modal-body {
+    margin: 80px auto;
+    max-width: 560px;
+    border-radius: 16px;
+    padding: 32px;
+  }
 }
 
 .site-footer {

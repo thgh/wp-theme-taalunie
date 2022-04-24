@@ -37,5 +37,40 @@ function cptui_register_custom_post_types()
         'menu_position' => 20,
         'show_in_rest' => true,
     ]);
+
+
+    register_post_type('doel', [
+        'label' => __('Doel', 'taalunie'),
+        'labels' => [
+            "new_item" => __('Nieuwe doel', 'taalunie'),
+            "add_new_item" => __('Nieuwe doel', 'taalunie'),
+
+            'add_new' => 'Nieuwe doel',
+            'add_new_item' => 'Nieuwe doel toevoegen',
+            'edit_item' => 'Doel aanpassen',
+            'new_item' => 'Nieuwe doel',
+
+            'name' => __('Doelen', 'taalunie'),
+            'singular_name' => __('Doel', 'taalunie'),
+            'menu_name' => __('Doelen', 'taalunie'),
+            'name_admin_bar' => __('Doelen', 'taalunie'),
+        ],
+        'supports' => ['title', 'editor', 'author', 'thumbnail'],
+        'hierarchical' => true,
+        'description' => 'Leerlingen kunnen deze doelen kiezen',
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => ['slug' => 'doel'],
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'menu_position' => 30,
+        'show_in_rest' => true,
+    ]);
+    
+    $category_args = get_taxonomy( 'category' );
+    register_taxonomy( 'category', 'doel', (array) $category_args );
 }
 add_action('init', 'cptui_register_custom_post_types');
