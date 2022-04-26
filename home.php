@@ -25,7 +25,7 @@ get_header();
         <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
           alt="">
       </a>
-      <a class="modal-option" href="/begeleider">
+      <a class="modal-option" href="/taak">
         <div class="modal-option__text">
           Ik ben begeleider.
         </div>
