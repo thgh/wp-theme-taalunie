@@ -68,7 +68,7 @@ get_header();
       <div class="container">
         <div class="d-flex align-items-center">
           <div class="flex-grow-1">
-            {{selection.length}} {{selection.length===1?'doel':'doelen'}} geselecteerd
+            {{selection.length}} {{selection.length===1?'doel':'doelen'}} gekozen
           </div>
           <div class="selection__next">
             Volgende
@@ -81,7 +81,7 @@ get_header();
     <div class="container pb-4" v-if="step !== 'sorting'">
       <h1 class="mb-2">{{category.name}}</h1>
 
-      <p class="mb-5" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
+      <p class="mb-5" style="font-size:18px">Kies de doelen waar je over wil leren</p>
 
       <div class="row">
         <div class="nav-sticky col-md-4 d-none d-md-block" :class="{'nav-sticky--low':selection.length}">
@@ -163,7 +163,7 @@ get_header();
             <div class="goal-card__title">
               <div class="goal-handle"></div>
               <input type="text" placeholder="Ik kan..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
-              <button type="submit" class="goal-add" :disabled="!title">Voeg toe</button>
+‹‹w              <button type="submit" class="goal-add" :disabled="!title">Voeg toe</button>
             </div>
           </form>
         </div>
@@ -183,7 +183,7 @@ get_header();
       <div class="container">
         <div class="d-flex align-items-center">
           <div class="flex-grow-1">
-            {{selection.length}} {{selection.length===1?'doel':'doelen'}} geselecteerd
+            {{selection.length}} {{selection.length===1?'doel':'doelen'}} gekozen
           </div>
           <div class="selection__next">
             Volgende

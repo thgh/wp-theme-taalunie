@@ -76,12 +76,12 @@ new Vue({
     },
     async loadCategories() {
       this.categoriesPromise = wpFetch('/wp-json/wp/v2/categories?per_page=1000')
-      this.categories = await this.categoriesPromise
+      this.categories = (await this.categoriesPromise).reverse()
       persist('categories', this.categories)
     },
     async loadDoelen() {
       this.allGoalsPromise = wpFetch('/wp-json/wp/v2/doel?per_page=1000')
-      this.allGoals = await this.allGoalsPromise
+      this.allGoals = (await this.allGoalsPromise).reverse()
       persist('allGoals', this.allGoals)
     },
     back() {
