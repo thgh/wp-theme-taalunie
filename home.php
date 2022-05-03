@@ -84,7 +84,7 @@ get_header();
       <p class="mb-3" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
 
       <div class="row">
-        <div class="col-md-4 d-none d-md-block">
+        <div class="nav-sticky col-md-4 d-none d-md-block">
           <div v-for="child in categoryChildren">
             <h3 class="nav-category">
               <a :href="'#' + child.slug">{{child.name}}</a>
