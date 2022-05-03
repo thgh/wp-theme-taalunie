@@ -75,12 +75,12 @@ new Vue({
       return this.allGoals.filter((g) => g.categories.includes(c.id))
     },
     async loadCategories() {
-      this.categoriesPromise = wpFetch('/wp-json/wp/v2/categories?per_page=100')
+      this.categoriesPromise = wpFetch('/wp-json/wp/v2/categories?per_page=1000')
       this.categories = await this.categoriesPromise
       persist('categories', this.categories)
     },
     async loadDoelen() {
-      this.allGoalsPromise = wpFetch('/wp-json/wp/v2/doel?per_page=100')
+      this.allGoalsPromise = wpFetch('/wp-json/wp/v2/doel?per_page=1000')
       this.allGoals = await this.allGoalsPromise
       persist('allGoals', this.allGoals)
     },
@@ -197,6 +197,9 @@ new Vue({
   watch: {
     p() {
       if (!this.categoriesPromise) this.loadCategories()
+    },
+    region(r) {
+      if (r && !this.categoriesPromise) this.loadCategories()
     },
     selection() {
       persist('selection', this.selection)
