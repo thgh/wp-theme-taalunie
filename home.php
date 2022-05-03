@@ -163,7 +163,7 @@ get_header();
             <div class="goal-card__title">
               <div class="goal-handle"></div>
               <input type="text" placeholder="Ik kan..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
-              <button type="submit" class="goal-add">Voeg toe</button>
+              <button type="submit" class="goal-add" :disabled="!title">Voeg toe</button>
             </div>
           </form>
         </div>

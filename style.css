@@ -1487,6 +1487,9 @@ html {
   padding: 8px 1.5em;
   transition: transform 0.2s;
 }
+.goal-add:disabled {
+  background: #999;
+}
 
 .flip-list-move {
   transition: transform 0.5s;
