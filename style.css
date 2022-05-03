@@ -1333,6 +1333,7 @@ html {
   padding: 4px 0;
   font: inherit;
   color: inherit;
+  font-weight: 600;
 }
 .nav-category > a:hover {
   color: #56af89;
