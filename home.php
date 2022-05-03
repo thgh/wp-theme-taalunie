@@ -81,7 +81,7 @@ get_header();
     <div class="container pb-4" v-if="step !== 'sorting'">
       <h1 class="mb-2">{{category.name}}</h1>
 
-      <p class="mb-3" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
+      <p class="mb-4" style="font-size:18px">Selecteer de doelen waar je over wil leren</p>
 
       <div class="row">
         <div class="nav-sticky col-md-4 d-none d-md-block" :class="{'nav-sticky--low':selection.length}">
