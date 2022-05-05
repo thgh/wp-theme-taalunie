@@ -10,7 +10,7 @@ function maximum_api_filter($query_params) {
     return $query_params;
 }
 add_filter('rest_category_collection_params', 'maximum_api_filter');
-add_filter('rest_goal_collection_params', 'maximum_api_filter');
+add_filter('rest_doel_collection_params', 'maximum_api_filter');
 
 
 function cptui_register_custom_post_types()
