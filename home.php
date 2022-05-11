@@ -105,7 +105,7 @@ get_header();
           <div class="category-section" v-for="child in categoryChildren" :id="child.slug">
             <h3 class="category-section-title" v-if="!child.children.length">{{child.name}}</h3>
             <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of child.goals">
-              <div class="goal-card__title">
+              <div class="goal-card__subtitle">
                 <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
                 {{goal.title.rendered}}
               </div>
