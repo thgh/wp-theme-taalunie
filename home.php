@@ -22,14 +22,14 @@ get_header();
         <div class="modal-option__text">
           Ik leer Nederlands.
         </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben leerder.svg"
           alt="">
       </a>
       <a class="modal-option" href="/taak">
         <div class="modal-option__text">
           Ik ben begeleider.
         </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben begeleider.svg"
           alt="">
       </a>
     </div>
@@ -40,14 +40,14 @@ get_header();
         <div class="modal-option__text">
           Ik woon in Nederland.
         </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in nederland.svg"
           alt="">
       </a>
       <a class="modal-option" href="/?p=leren&region=be" @click="visit">
         <div class="modal-option__text">
           Ik woon in België.
         </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png"
+        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in belgie.svg"
           alt="">
       </a>
     </div>
@@ -168,7 +168,7 @@ get_header();
           </form>
         </div>
         <div class="col-md-4 d-none d-md-block">
-          <img loading="lazy" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/modal-option.png" />
+          <img loading="lazy" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/Computer bibliotheek online_computer leerders.png" />
         </div>
       </div>
     </div>
