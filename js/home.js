@@ -81,7 +81,7 @@ new Vue({
     },
     async loadDoelen() {
       this.allGoalsPromise = wpFetch('/wp-json/wp/v2/doel?per_page=1000')
-      this.allGoals = await this.allGoalsPromise
+      this.allGoals = (await this.allGoalsPromise).reverse()
       persist('allGoals', this.allGoals)
     },
     back() {
