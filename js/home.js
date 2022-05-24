@@ -111,6 +111,9 @@ new Vue({
 
       if (!back) window.history.pushState({}, '', url)
     },
+    alertBE(){
+      alert('Aan de Vlaamse versie van de leerdoelencatalogus wordt op dit moment hard gewerkt. We plaatsen die zo snel mogelijk online.')
+    },
 
     // Selection
     toggle(goal) {
