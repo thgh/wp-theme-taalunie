@@ -1514,9 +1514,9 @@ html {
 }
 .goal-remove {
   cursor: pointer;
-  border-radius: 5px;
-  margin: -13px -16px -13px 0;
-  padding: 12px 13px;
+  border-radius: 44px;
+  margin: -12px -10px -12px 0;
+  padding: 12px;
   border: none;
   background: none;
   transition: transform .2s;
