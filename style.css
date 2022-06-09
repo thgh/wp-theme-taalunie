@@ -1512,6 +1512,17 @@ html {
   font-size: 24px;
   margin-right: 30px;
 }
+.goal-remove {
+  cursor: pointer;
+  margin: -17px -16px -17px 0;
+  padding: 16px;
+  border: none;
+  background: none;
+  transition: transform .2s;
+}
+.goal-remove:hover {
+  transform: rotate(90deg);
+}
 .goal-group {
   cursor: move;
 }
