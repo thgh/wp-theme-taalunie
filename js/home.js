@@ -41,7 +41,7 @@ new Vue({
     },
     categoryGoals() {
       if (!this.allGoalsPromise) setTimeout(() => this.loadDoelen())
-      return this.allGoals.filter((g) =>
+      return this.regionGoals.filter((g) =>
         g.categories.includes(this.category.id)
       )
     },
@@ -62,6 +62,17 @@ new Vue({
       )
     },
 
+    // Goals by region
+    regionGoals() {
+      if (!this.region) return this.allGoals
+      if (!this.regionsPromise) setTimeout(() => this.loadRegions())
+      if (!this.regions) return this.allGoals
+      const region = this.regions.find(r => r.slug === this.region)
+      if (!region) return this.allGoals
+      const regionId = region.id
+      return this.allGoals.filter(goal => !goal.region || !goal.region.length || goal.region.includes(regionId))
+    },
+
     // Selection
     ids() {
       return this.selection.map((g) => g.id)
@@ -72,7 +83,7 @@ new Vue({
       return this.categories.filter((c) => c.parent === parent.id)
     },
     goalsByCategory(c) {
-      return this.allGoals.filter((g) => g.categories.includes(c.id))
+      return this.regionGoals.filter((g) => g.categories.includes(c.id))
     },
     async loadCategories() {
       this.categoriesPromise = wpFetch('/wp-json/wp/v2/categories?per_page=1000')
@@ -83,6 +94,11 @@ new Vue({
       this.allGoalsPromise = wpFetch('/wp-json/wp/v2/doel?per_page=1000')
       this.allGoals = (await this.allGoalsPromise).reverse()
       persist('allGoals', this.allGoals)
+    },
+    async loadRegions() {
+      this.regionsPromise = wpFetch('/wp-json/wp/v2/region')
+      this.regions = (await this.regionsPromise).reverse()
+      persist('regions', this.regions)
     },
     back() {
       const url = new URL(window.location.href)
