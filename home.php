@@ -154,7 +154,7 @@ get_header();
                 <div class="goal-card__title">
                   <div class="goal-handle">=</div>
                   <div class="flex-grow-1">{{goal.title}}</div>
-                  <button class="goal-remove" @click="toggle(goal)">
+                  <button class="goal-remove" @mousedown.stop @click.stop.prevent="toggle(goal)">
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="#08234E" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/>
                     </svg>
