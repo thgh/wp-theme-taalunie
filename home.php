@@ -36,14 +36,14 @@ get_header();
   </div>
   <div class="modal-body" v-else-if="!region" v-cloak>
     <div class="modal-options">
-      <a class="modal-option" href="/?p=leren&region=nl" @click="visit">
+      <a class="modal-option" href="/?p=leren&regio=nl" @click="visit">
         <div class="modal-option__text">
           Ik woon in Nederland.
         </div>
         <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in nederland.svg"
           alt="">
       </a>
-      <a class="modal-option" href="/?p=leren&region=be" @click.prevent="alertBE">
+      <a class="modal-option" href="/?p=leren&regio=be" @click.prevent="alertBE">
         <div class="modal-option__text">
           Ik woon in België.
         </div>
