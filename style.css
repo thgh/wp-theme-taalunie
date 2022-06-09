@@ -1286,15 +1286,18 @@ html {
 .category-card {
   flex-basis: 40%;
   flex-grow: 1;
-  padding: 16px;
   margin: 8px;
+  padding: 16px 0;
   color: #182b49 !important;
   font-weight: 600;
   font-size: 20px;
   border: none;
-  border-top: 140px solid #d8e5ef;
   background: white;
   box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+}
+.category-name {
+  padding: 16px 16px 0;
+  text-align: center;
 }
 @media (min-width: 576px) {
   .categories {
