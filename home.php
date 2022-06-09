@@ -134,7 +134,9 @@ get_header();
       <h1>Andere domeinen</h1>
       <div class="categories categories--main mb-4">
         <a class="category-card" v-for="category of otherCategories" :href="slugify(category)" @click="visit">
-          {{category.name}}
+          <img class="category-thumb" :src="category.thumb" v-if="category.thumb">
+          <div class="category-thumb" v-else></div>
+          <div class="category-name">{{category.name}}</div>
         </a>
       </div>
     </div>
