@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 ?>
@@ -14,14 +14,14 @@
 		<?php the_title('<h1 class="entry-title">', '</h1>');?>
 	</header><!-- .entry-header -->
 
-	<?php hsn_theme_post_thumbnail();?>
+	<?php taalunie_post_thumbnail();?>
 
 	<div class="entry-content">
 		<?php
 the_content();
 
 wp_link_pages(array(
-    'before' => '<div class="page-links">' . esc_html__('Pages:', 'hsn-theme'),
+    'before' => '<div class="page-links">' . esc_html__('Pages:', 'taalunie-theme'),
     'after' => '</div>',
 ));
 ?>
@@ -34,7 +34,7 @@ edit_post_link(
     sprintf(
         wp_kses(
             /* translators: %s: Name of current post. Only visible to screen readers */
-            __('Edit <span class="screen-reader-text">%s</span>', 'hsn-theme'),
+            __('Edit <span class="screen-reader-text">%s</span>', 'taalunie-theme'),
             array(
                 'span' => array(
                     'class' => array(),

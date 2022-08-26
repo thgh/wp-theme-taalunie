@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 global $parent;
 $author = get_post_meta($post->ID, 'auteur', true);
@@ -82,14 +82,14 @@ function renderPDFcontents($pages, $classname) {
       ?>
       <div class="entry-meta">
         <?php
-        hsn_theme_posted_on();
-        hsn_theme_posted_by();
+        taalunie_posted_on();
+        taalunie_posted_by();
         ?>
       </div><!-- .entry-meta -->
     <?php endif; ?>
   </header><!-- .entry-header -->
 
-  <?php hsn_theme_post_thumbnail(); ?>
+  <?php taalunie_post_thumbnail(); ?>
 
   <div class="entry-content">
     <p>
@@ -131,11 +131,11 @@ if (!empty($bundelPDFurl) || !empty($articlePDF)) {
       <?php elseif (!empty($bundelPDFurl)): ?>
         <a class="download-pdf article-pdf-toggle" target="_blank" download href="<?php echo esc_url($bundelPDFurl) ?>"><b>Download bundel</b></a>
       <?php endif ?>
-      <?php hsn_theme_entry_footer(); ?>
+      <?php taalunie_entry_footer(); ?>
     </p>
   <?php
 } else {
-  hsn_theme_entry_footer();
+  taalunie_entry_footer();
 }
 
 function contentful($value='')
@@ -193,7 +193,7 @@ if (!$isContentRendered) {
 }
 
 
-$baseUrl = esc_url( home_url( '/wp-json/hsn-theme/bijdrage-at-page' ) );
+$baseUrl = esc_url( home_url( '/wp-json/taalunie-theme/bijdrage-at-page' ) );
 ?>
     <div class="sticky-bottom">
       <nav class="navigation post-navigation" role="navigation">

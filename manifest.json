@@ -1,8 +1,8 @@
 {
   "background_color": "#212d4c",
   "theme_color": "#24aac5",
-  "name": "HSN bundels",
-  "short_name": "HSN",
+  "name": "Taalunie mijnNederlands",
+  "short_name": "mijnNederlands",
   "display": "minimal-ui",
   "start_url": "/",
   "icons": [

@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 /*
@@ -28,18 +28,18 @@ if ( post_password_required() ) {
 		?>
 		<h2 class="comments-title">
 			<?php
-			$hsn_theme_comment_count = get_comments_number();
-			if ( '1' === $hsn_theme_comment_count ) {
+			$taalunie_comment_count = get_comments_number();
+			if ( '1' === $taalunie_comment_count ) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'hsn-theme' ),
+					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'taalunie-theme' ),
 					'<span>' . get_the_title() . '</span>'
 				);
 			} else {
 				printf( // WPCS: XSS OK.
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $hsn_theme_comment_count, 'comments title', 'hsn-theme' ) ),
-					number_format_i18n( $hsn_theme_comment_count ),
+					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $taalunie_comment_count, 'comments title', 'taalunie-theme' ) ),
+					number_format_i18n( $taalunie_comment_count ),
 					'<span>' . get_the_title() . '</span>'
 				);
 			}
@@ -63,7 +63,7 @@ if ( post_password_required() ) {
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() ) :
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'hsn-theme' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'taalunie-theme' ); ?></p>
 			<?php
 		endif;
 

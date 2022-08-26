@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 $meta = get_post_meta($post->ID);
@@ -32,7 +32,7 @@ $thumb = get_the_post_thumbnail_url($post->ID, [194, 290]);
 
       <?php
       wp_link_pages( array(
-        'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'hsn-theme' ),
+        'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'taalunie-theme' ),
         'after'  => '</div>',
       ) );
       ?>

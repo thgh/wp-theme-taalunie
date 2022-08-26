@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {

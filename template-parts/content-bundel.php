@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 $pageOffset = (int) get_post_meta($post->ID, 'page_offset', true);
 $pdfId = get_post_meta($post->ID, 'pdf', true);
@@ -40,7 +40,7 @@ if (!empty($pdfId)) {
       </div><!-- .entry-content -->
 
       <footer class="entry-footer">
-        <?php hsn_theme_entry_footer(); ?>
+        <?php taalunie_entry_footer(); ?>
 
       </footer><!-- .entry-footer -->
 

@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 ?>
@@ -38,7 +38,7 @@
 
 <body <?php body_class();?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'hsn-theme');?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'taalunie-theme');?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="container">
@@ -59,7 +59,7 @@ endif;?>
 		<?php if (isset($suppress_nav_menu)):?>
 		<nav id="site-navigation" class="main-navigation">
 			<div class="container">
-				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Menu', 'hsn-theme');?></button>
+				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e('Menu', 'taalunie-theme');?></button>
 				<?php
 wp_nav_menu(array(
     'theme_location' => 'menu-1',

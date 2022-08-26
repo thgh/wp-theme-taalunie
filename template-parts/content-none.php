@@ -4,14 +4,14 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 ?>
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e('Nothing Found', 'hsn-theme');?></h1>
+		<h1 class="page-title"><?php esc_html_e('Nothing Found', 'taalunie-theme');?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -21,7 +21,7 @@ if (is_home() && current_user_can('publish_posts')):
     printf(
         '<p>' . wp_kses(
             /* translators: 1: link to WP admin new post page. */
-            __('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'hsn-theme'),
+            __('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'taalunie-theme'),
             array(
                 'a' => array(
                     'href' => array(),
@@ -34,14 +34,14 @@ if (is_home() && current_user_can('publish_posts')):
 elseif (is_search()):
 ?>
 
-			<p><?php esc_html_e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'hsn-theme');?></p>
+			<p><?php esc_html_e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'taalunie-theme');?></p>
 			<?php
 get_search_form();
 
 else:
 ?>
 
-			<p><?php esc_html_e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'hsn-theme');?></p>
+			<p><?php esc_html_e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'taalunie-theme');?></p>
 			<?php
 get_search_form();
 

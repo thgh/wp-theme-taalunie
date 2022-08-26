@@ -8,33 +8,33 @@
  *
  * @link https://developer.wordpress.org/themes/functionality/custom-headers/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses hsn_theme_header_style()
+ * @uses taalunie_header_style()
  */
-function hsn_theme_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'hsn_theme_custom_header_args', array(
+function taalunie_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'taalunie_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'hsn_theme_header_style',
+		'wp-head-callback'       => 'taalunie_header_style',
 	) ) );
 }
-add_action( 'after_setup_theme', 'hsn_theme_custom_header_setup' );
+add_action( 'after_setup_theme', 'taalunie_custom_header_setup' );
 
-if ( ! function_exists( 'hsn_theme_header_style' ) ) :
+if ( ! function_exists( 'taalunie_header_style' ) ) :
 	/**
 	 * Styles the header image and text displayed on the blog.
 	 *
-	 * @see hsn_theme_custom_header_setup().
+	 * @see taalunie_custom_header_setup().
 	 */
-	function hsn_theme_header_style() {
+	function taalunie_header_style() {
 		$header_text_color = get_header_textcolor();
 
 		/*

@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 ?>
@@ -32,7 +32,7 @@
         </a>
       </div>
       <div class="col-md-4">
-        <a style="font-size: 14px; color: white;" href="https://twitter.com/taalunie?ref=hsnbundels">
+        <a style="font-size: 14px; color: white;" href="https://twitter.com/taalunie?ref=taalunie">
           <p class="pt-3">
             <img class="mr-2" style="width:30px"
               src="<?php echo esc_url( get_template_directory_uri()) ?>/img/twitter-icon.png" alt="">
@@ -40,7 +40,7 @@
           </p>
         </a>
         <a style="font-size: 14px; color: white;"
-          href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=hsnbundels">
+          href="https://nl.linkedin.com/company/nederlandse-taalunie?ref=taalunie">
           <p>
             <div class="icon mr-2">
               <svg viewBox="0 0 24 24">

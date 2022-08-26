@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
 get_header();
@@ -15,7 +15,7 @@ get_header();
 
 			<section class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oeps! Deze pagina kunnen we niet vinden.', 'hsn-theme' ); ?></h1>
+					<h1 class="page-title"><?php esc_html_e( 'Oeps! Deze pagina kunnen we niet vinden.', 'taalunie-theme' ); ?></h1>
 				</header><!-- .page-header -->
 			</section><!-- .error-404 -->
 

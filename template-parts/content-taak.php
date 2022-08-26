@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _s
+ * @package wp-theme-taalunie
  */
 ?>
 
@@ -21,21 +21,21 @@ if ('post' === get_post_type()):
 ?>
 			<div class="entry-meta">
 				<?php
-hsn_theme_posted_on();
-hsn_theme_posted_by();
+taalunie_posted_on();
+taalunie_posted_by();
 ?>
 			</div><!-- .entry-meta -->
 		<?php endif;?>
 	</header><!-- .entry-header -->
 
-	<?php hsn_theme_post_thumbnail();?>
+	<?php taalunie_post_thumbnail();?>
 
 	<div class="entry-content">
 		<?php
 the_content(sprintf(
     wp_kses(
         /* translators: %s: Name of current post. Only visible to screen readers */
-        __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'hsn-theme'),
+        __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'taalunie-theme'),
         array(
             'span' => array(
                 'class' => array(),
@@ -46,14 +46,14 @@ the_content(sprintf(
 ));
 
 wp_link_pages(array(
-    'before' => '<div class="page-links">' . esc_html__('Pages:', 'hsn-theme'),
+    'before' => '<div class="page-links">' . esc_html__('Pages:', 'taalunie-theme'),
     'after' => '</div>',
 ));
 ?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php hsn_theme_entry_footer();?>
+		<?php taalunie_entry_footer();?>
 	</footer><!-- .entry-footer -->
 
   <dl class="dl-horizontal entry-terms">

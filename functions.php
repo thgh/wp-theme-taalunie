@@ -1,35 +1,18 @@
 <?php
-add_filter('show_admin_bar', '__return_false');
-add_action('admin_bar_menu', 'remove_wp_nodes', 999);
-
-function remove_wp_nodes()
-{
-    global $wp_admin_bar;
-    $wp_admin_bar->remove_node('new-page');
-    $wp_admin_bar->remove_node('new-post');
-    $wp_admin_bar->remove_node('new-link');
-    $wp_admin_bar->remove_node('new-media');
-}
-
-if (function_exists('acf_add_options_page')) {
-    acf_add_options_page();
-    acf_add_options_sub_page('Footer');
-}
-
 /**
- * hsn-theme functions and definitions
+ * taalunie-theme functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package taalunie
+ * @package wp-theme-taalunie
  */
 
-if (!defined('hsn_theme_VERSION')) {
+if (!defined('taalunie_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('hsn_theme_VERSION', '4');
+    define('taalunie_VERSION', '1.0.0');
 }
 
-if (!function_exists('hsn_theme_setup')):
+if (!function_exists('taalunie_setup')):
     /**
      * Sets up theme defaults and registers support for various WordPress features.
      *
@@ -37,15 +20,15 @@ if (!function_exists('hsn_theme_setup')):
      * runs before the init hook. The init hook is too late for some features, such
      * as indicating support for post thumbnails.
      */
-    function hsn_theme_setup()
+    function taalunie_setup()
 {
         /*
          * Make theme available for translation.
          * Translations can be filed in the /languages/ directory.
-         * If you're building a theme based on hsn-theme, use a find and replace
-         * to change 'hsn-theme' to the name of your theme in all the template files.
+         * If you're building a theme based on taalunie-theme, use a find and replace
+         * to change 'taalunie-theme' to the name of your theme in all the template files.
          */
-        load_theme_textdomain('hsn-theme', get_template_directory() . '/languages');
+        load_theme_textdomain('taalunie-theme', get_template_directory() . '/languages');
 
         // Add default posts and comments RSS feed links to head.
         add_theme_support('automatic-feed-links');
@@ -67,7 +50,7 @@ if (!function_exists('hsn_theme_setup')):
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
-            'menu-1' => esc_html__('Primary', 'hsn-theme'),
+            'menu-1' => esc_html__('Primary', 'taalunie-theme'),
         ));
 
         /*
@@ -85,7 +68,7 @@ if (!function_exists('hsn_theme_setup')):
         ));
 
         // Set up the WordPress core custom background feature.
-        add_theme_support('custom-background', apply_filters('hsn_theme_custom_background_args', array(
+        add_theme_support('custom-background', apply_filters('taalunie_custom_background_args', array(
             'default-color' => 'ffffff',
             'default-image' => '',
         )));
@@ -106,7 +89,7 @@ if (!function_exists('hsn_theme_setup')):
         ));
     }
 endif;
-add_action('after_setup_theme', 'hsn_theme_setup');
+add_action('after_setup_theme', 'taalunie_setup');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -115,46 +98,46 @@ add_action('after_setup_theme', 'hsn_theme_setup');
  *
  * @global int $content_width
  */
-function hsn_theme_content_width()
+function taalunie_content_width()
 {
-    $GLOBALS['content_width'] = apply_filters('hsn_theme_content_width', 640);
+    $GLOBALS['content_width'] = apply_filters('taalunie_content_width', 640);
 }
-add_action('after_setup_theme', 'hsn_theme_content_width', 0);
+add_action('after_setup_theme', 'taalunie_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function hsn_theme_widgets_init()
+function taalunie_widgets_init()
 {
     register_sidebar(array(
-        'name' => esc_html__('Sidebar', 'hsn-theme'),
+        'name' => esc_html__('Sidebar', 'taalunie-theme'),
         'id' => 'sidebar-1',
-        'description' => esc_html__('Add widgets here.', 'hsn-theme'),
+        'description' => esc_html__('Add widgets here.', 'taalunie-theme'),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget' => '</section>',
         'before_title' => '<h2 class="widget-title">',
         'after_title' => '</h2>',
     ));
 }
-add_action('widgets_init', 'hsn_theme_widgets_init');
+add_action('widgets_init', 'taalunie_widgets_init');
 
 /**
  * Enqueue scripts and styles.
  */
-function hsn_theme_scripts()
+function taalunie_scripts()
 {
-    wp_enqueue_style('hsn_theme-style', get_stylesheet_uri(), array(), hsn_theme_VERSION);
-    wp_style_add_data('hsn_theme-style', 'rtl', 'replace');
+    wp_enqueue_style('taalunie-style', get_stylesheet_uri(), array(), taalunie_VERSION);
+    wp_style_add_data('taalunie-style', 'rtl', 'replace');
 
-    wp_enqueue_script('hsn_theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), hsn_theme_VERSION, true);
+    wp_enqueue_script('taalunie-navigation', get_template_directory_uri() . '/js/navigation.js', array(), taalunie_VERSION, true);
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
 }
-add_action('wp_enqueue_scripts', 'hsn_theme_scripts');
+add_action('wp_enqueue_scripts', 'taalunie_scripts');
 
 add_action('pre_get_posts', 'taak_query_sort_asc');
 function taak_query_sort_asc($query)
@@ -172,7 +155,9 @@ function taak_query_sort_asc($query)
 /**
  * HSN
  */
-require get_template_directory() . '/inc/onderwijstermen-taxonomies.php';
+// require get_template_directory() . '/inc/onderwijstermen-taxonomies.php';
+
+// Performance
 require get_template_directory() . '/inc/disable-emojis.php';
 
 /**
