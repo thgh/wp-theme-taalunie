@@ -1335,7 +1335,7 @@ html {
   padding-bottom: 20px;
   overflow-x: auto;
   margin-top: -30px;
-  transition: padding .2s, margin .2s;
+  transition: padding 0.2s, margin 0.2s;
 }
 .nav-sticky--low {
   padding-top: 80px;
@@ -1519,7 +1519,7 @@ html {
   padding: 12px;
   border: none;
   background: none;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 .goal-remove:hover {
   transform: rotate(90deg);
@@ -1729,7 +1729,7 @@ html {
 }
 
 .site-branding {
-  padding: 4px 0;
+  /* padding: 4px 0; */
 }
 
 .site-branding img {

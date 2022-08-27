@@ -1,2 +1,5 @@
 /migration
 /wordpress
+/public
+/_volumes/mysql/*
+!/_volumes/mysql/.gitkeep
