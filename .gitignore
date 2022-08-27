@@ -1,4 +1,5 @@
 /migration
+/node_modules
 /wordpress
 /public
 /_volumes/mysql/*

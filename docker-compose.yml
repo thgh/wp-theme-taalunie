@@ -26,6 +26,7 @@ services:
     volumes:
       - ./public:/var/www/html/public
       - ./acf-headless:/var/www/html/public/wp-content/plugins/acf-headless
+      - ./subsidy-application:/var/www/html/public/wp-content/plugins/subsidy-application
       - .:/var/www/html/public/wp-content/themes/wp-theme-taalunie
     networks:
       - web-dev

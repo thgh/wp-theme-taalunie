@@ -3,12 +3,14 @@ Vue.config.devtools = false
 
 const html = String.raw
 Vue.component('Field', {
-  props: ['field'],
-  template: html`<div v-if="field.settings.type === 'group'" />
+  props: ['value', 'field'],
+  template: html`<div v-if="!value">no value</div>
+    <div v-else-if="field.settings.type === 'group'">group {{field.key}}</div>
     <input
       v-else-if="field.settings.type === 'text'"
       type="text"
       class="d-block inp"
+      v-model="model"
     />
     <textarea
       v-else-if="field.settings.type === 'textarea'"
@@ -19,237 +21,242 @@ Vue.component('Field', {
     ></textarea>
     <div v-else-if="field.settings.type === 'checkbox'" type="text">
       <label
-        v-for="(label, value) of field.settings.choices"
+        v-for="(label, val) of field.settings.choices"
         class="d-flex mb-0 py-2"
       >
-        <input type="checkbox" class="mr-2" /> {{label}}
+        <input type="checkbox" class="mr-2" v-model="model" :value="val" />
+        {{label}}
       </label>
+    </div>
+    <div v-else-if="field.settings.type === 'button_group'" type="text">
+      <label
+        v-for="(label, val) of field.settings.choices"
+        class="d-flex mb-0 py-2"
+      >
+        <input
+          type="radio"
+          class="mr-2"
+          :value="val"
+          :name="field.key"
+          v-model="model"
+        />
+        {{label}}
+      </label>
+      <pre>{{field}}</pre>
+    </div>
+    <div v-else-if="field.settings.type === 'post_object'" type="text">
+      <input
+        type="text"
+        placeholder="autocomplete organisatie"
+        class="d-block inp"
+        v-model="model"
+      />
+      <button
+        type="button"
+        :disabled="model === org.id"
+        :style="{background: model === org.id ? '#212d4c':'',color: model === org.id ? '#fff':''}"
+        @click="$set(value, field.key, org.id)"
+        v-for="org in $root.organisations"
+      >
+        {{org.title}}
+      </button>
     </div>
     <div v-else>
       Unexpected input type: {{field.settings.type}}
       <pre>{{field}}</pre>
     </div> `,
+  computed: {
+    model: {
+      get() {
+        return this.value[this.field.key] ?? this.field.settings.default_value
+      },
+      set(value) {
+        this.$set(this.value, this.field.key, value)
+      },
+    },
+  },
+  methods: {},
+  mounted() {
+    if (!this.value) this.$emit('change', {})
+  },
 })
 
 new Vue({
   el: '#app',
   data() {
     const url = new URL(window.location.href)
+    const draftIds = Object.keys(window.localStorage).filter((d) =>
+      d.startsWith('draft/')
+    )
     return {
-      p: url.searchParams.get('p') || '',
-      region: url.searchParams.get('regio') || '',
-      categorySlug: url.searchParams.get('category') || '',
-      step: url.searchParams.get('step') || '',
-      groupsPromise: null,
+      // Route
+      draftId: url.searchParams.get('draftId') || '',
+
+      // Me
+      user: window.user,
+
+      // Form schema
+      allGroupsPromise: null,
       allFieldsPromise: null,
       allFields: stale('allFields') || [],
-      groups: stale('groups') || [{ title: 'Aanvrager' }],
-      selection: stale('selection') || [],
-      draggable: false,
-      drag: false,
-      title: '',
+      allGroups: stale('allGroups') || [{ title: 'Aanvrager' }],
+
+      // My organisation data
+      allOrganisationsPromise: null,
+      allOrganisations: stale('allOrganisations'),
+
+      // My application data
+      draftIds,
+      editor: !draftIds.length && !window.user.ID ? this.emptyDraft() : null,
+      myApplicationsPromise: null,
+      myApplications: null,
     }
   },
   computed: {
+    // User
+    signedIn() {
+      return window.user.ID
+    },
+    userData() {
+      return window.user.data || {}
+    },
+    applications() {
+      if (!this.signedIn) return []
+      if (!this.myApplicationsPromise)
+        setTimeout(() => this.loadMyApplications(), 10)
+      return this.myApplications
+    },
+    organisations() {
+      if (!this.allOrganisationsPromise)
+        setTimeout(() => this.loadAllOrganisations(), 10)
+      return this.allOrganisations
+    },
+
+    // Form
     fieldIds() {
       return this.allFields.map((c) => c.id)
     },
     rootFields() {
       return this.allFields
+        .filter((f) => f.settings.type !== 'user')
         .filter((c) => !this.fieldIds.includes(c.parent))
         .map((parent) =>
           Object.assign(parent, {
             children: this.allFields.filter((f) => f.parent === parent.id),
-            // children: this.childrenByCategory(parent).map((grandchild) =>
-            //   Object.assign(
-            //     { fields: this.fieldsByCategory(grandchild) },
-            //     grandchild
-            //   )
-            // ),
           })
         )
     },
-    otherGroups() {
-      if (!this.category) return this.mainGroups
-      return this.mainGroups.filter((c) => c.id !== this.category.id)
-    },
-    category() {
-      setTimeout(() => {
-        if (
-          this.groups.length &&
-          !this.groups.find((c) => c.slug === this.categorySlug)
-        ) {
-          this.categorySlug = ''
-        }
-      }, 500)
-      return this.groups.find((c) => c.slug === this.categorySlug)
-    },
-    categoryFields() {
-      if (!this.allFieldsPromise) setTimeout(() => this.loadFields())
-      return this.regionFields.filter((g) =>
-        g.groups.includes(this.category.id)
-      )
-    },
-    categoryChildren() {
-      return this.childrenByCategory(this.category).map((child) =>
-        Object.assign(
-          {
-            fields: this.fieldsByCategory(child),
-            children: this.childrenByCategory(child).map((grandchild) =>
-              Object.assign(
-                { fields: this.fieldsByCategory(grandchild) },
-                grandchild
-              )
-            ),
-          },
-          child
-        )
-      )
-    },
 
-    // Fields by region
-    regionFields() {
-      if (!this.region) return this.allFields
-      if (!this.regionsPromise) setTimeout(() => this.loadRegions())
-      if (!this.regions) return this.allFields
-      const region = this.regions.find((r) => r.slug === this.region)
-      if (!region) return this.allFields
-      const regionId = region.id
-      return this.allFields.filter(
-        (goal) =>
-          !goal.region || !goal.region.length || goal.region.includes(regionId)
-      )
+    // Application
+    title() {
+      return this.editor.title || 'Nieuwe aanvraag'
     },
-
-    // Selection
-    ids() {
-      return this.selection.map((g) => g.id)
+    drafts() {
+      this.draftId
+      return this.draftIds.map((id) => stale(id))
     },
   },
   methods: {
-    // childrenByCategory(parent) {
-    //   return this.groups.filter((c) => c.parent === parent.id)
-    // },
-    // fieldsByCategory(c) {
-    //   return this.regionFields.filter((g) => g.groups.includes(c.id))
-    // },
+    emptyDraft() {
+      return {
+        draftId: Math.random().toString(36).slice(2),
+        createdAt: new Date().toJSON(),
+        id: 0,
+        acf: {},
+        slug: {},
+      }
+    },
+    loadDraft(draftId) {
+      draftId = draftId.replace('draft/', '')
+      this.editor = stale('draft/' + draftId)
+      const url = new URL(window.location.href)
+      url.searchParams.set('draftId', draftId)
+      url.hash = ''
+      this.visitURL(url)
+    },
     async loadGroups() {
-      this.groupsPromise = wpFetch('/wp-json/wp/v2/acf-field-group')
-      this.groups = await this.groupsPromise
-      persist('groups', this.groups)
+      this.allGroupsPromise = wpFetch('/wp-json/wp/v2/acf-field-group')
+      this.allGroups = await this.allGroupsPromise
+      persist('allGroups', this.allGroups)
     },
     async loadFields() {
-      this.allFieldsPromise = wpFetch('/wp-json/wp/v2/acf-field')
+      this.allFieldsPromise = wpFetch('/wp-json/wp/v2/acf-field?per_page=20')
       this.allFields = (await this.allFieldsPromise).reverse()
       persist('allFields', this.allFields)
     },
-    // back() {
-    //   const url = new URL(window.location.href)
-    //   url.searchParams.delete('category')
-    //   url.searchParams.delete('step')
-    //   url.hash = ''
-    //   return url.toString()
-    // },
-    // slugify(category) {
-    //   const url = new URL(window.location.href)
-    //   url.searchParams.set('category', category.slug)
-    //   url.hash = ''
-    //   return url.toString()
-    // },
-    // visit(event) {
-    //   event.preventDefault()
-    //   const url = new URL(event.target.href || event.target.parentElement.href)
-    //   this.visitURL(url, false)
-    // },
-    // visitURL(url, back = false) {
-    //   this.p = url.searchParams.get('p') || ''
-    //   this.region = url.searchParams.get('regio') || ''
-    //   this.categorySlug = url.searchParams.get('category') || ''
-    //   this.step = url.searchParams.get('step') || ''
-    //   document.body.scrollIntoView()
+    async loadMyApplications() {
+      this.myApplicationsPromise = wpFetch('/wp-json/wp/v2/application')
+      this.myApplications = (await this.myApplicationsPromise).reverse()
+    },
+    async loadAllOrganisations() {
+      this.allOrganisationsPromise = wpFetch('/wp-json/wp/v2/organisation')
+      this.allOrganisations = (await this.allOrganisationsPromise).reverse()
+      persist('allOrganisations', this.allOrganisations)
+    },
 
-    //   if (!back) window.history.pushState({}, '', url)
-    // },
+    // Routing
 
-    // // Selection
-    // toggle(goal) {
-    //   if (this.ids.includes(goal.id)) {
-    //     this.selection = this.selection.filter((g) => g.id !== goal.id)
-    //   } else
-    //     this.selection.push({
-    //       id: goal.id,
-    //       title: goal.title.rendered,
-    //       content: goal.content.rendered,
-    //     })
-    // },
-    // next() {
-    //   if (!this.step) {
-    //     const url = new URL(window.location.href)
-    //     url.searchParams.set('step', 'sorting')
-    //     url.hash = ''
-    //     this.visitURL(url)
-    //     return
-    //   }
-    //   if (this.step === 'sorting') {
-    //     const url = new URL(window.location.href)
-    //     url.searchParams.set('step', 'linking')
-    //     url.hash = ''
-    //     this.visitURL(url)
-    //     return
-    //   }
-    // },
-    // async finish() {
-    //   if (this.saving) return
-    //   this.saving = true
-    //   try {
-    //     const ok = await wpFetch('/wp-json/anonymous-storage/v1/item', {
-    //       method: 'POST',
-    //       body: JSON.stringify({
-    //         author: this.author || prompt('Wat is jouw naam?') || 'Anoniem',
-    //         selection: this.selection,
-    //       }),
-    //     })
-    //     this.saving = false
+    visit(event) {
+      event.preventDefault()
+      const url = new URL(event.target.href || event.target.parentElement.href)
+      this.visitURL(url, false)
+    },
+    visitURL(url, back = false) {
+      console.log('url', url.toString())
+      const before = this.draftId
+      this.draftId = url.searchParams.get('draftId') || ''
+      if (!this.draftId && before) this.editor = null
+      document.body.scrollIntoView()
 
-    //     console.log('ok', ok)
-    //     localStorage.selection = null
-    //     window.location.href =
-    //       '/mijn-fields?' +
-    //       serialize({ readkey: ok.readkey, writekey: ok.writekey })
-    //   } catch (error) {
-    //     this.saving = false
-    //     alert('Jouw fields zijn NIET bewaard. ' + error.message)
-    //   }
-    // },
+      if (!back) window.history.pushState({}, '', url)
+    },
 
-    // // Sorting
-    // async loadSorting() {
-    //   if (this.draggable) return
-    //   this.draggable = 1
-    //   await loadScript('https://unpkg.com/sortablejs@1.15.0/Sortable.min.js')
-    //   await loadScript(
-    //     'https://unpkg.com/vuedraggable@2.24.3/dist/vuedraggable.umd.min.js'
-    //   )
-    //   this.draggable = 2
-    // },
-    // add(title) {
-    //   this.selection.push({ id: Math.random(), title })
-    //   this.title = ''
-    //   const elem = document.querySelector('#addgoaltitle')
-    //   if (elem) elem.focus()
-    // },
+    // Helpers
+    clear() {
+      window.localStorage.clear()
+      location.reload()
+    },
+    reconsider() {
+      this.loadMyApplications()
+    },
   },
   mounted() {
     this.loadGroups()
     this.loadFields()
     // window.jQuery('#collapse0').collapse('toggle')
+
+    if (this.signedIn) {
+      this.loadMyApplications()
+      console.log()
+    }
+
+    if (this.draftId && !this.editor) {
+      this.loadDraft(this.draftId)
+    }
+
+    window.addEventListener('focus', this.reconsider)
+    window.addEventListener('visible', this.reconsider)
+    // Routing
+    window.addEventListener(
+      'popstate',
+      () => this.visitURL(new URL(window.location.href), true),
+      false
+    )
   },
-  watch: {},
+  watch: {
+    editor: {
+      deep: true,
+      handler(d) {
+        console.log('d', d)
+        if (d) persist('draft/' + d.draftId, d)
+      },
+    },
+  },
 })
 
 function persist(key, data) {
   try {
-    localStorage[key] = JSON.stringify({
+    window.localStorage[key] = JSON.stringify({
       at: new Date(),
       data,
     })
@@ -258,15 +265,24 @@ function persist(key, data) {
 
 function stale(key) {
   try {
-    const data = localStorage[key]
+    const data = window.localStorage[key]
+    console.log('stale', data)
     if (!data) return
+    console.log('stalee', JSON.parse(data))
     return JSON.parse(data).data
   } catch (error) {}
 }
 
 function wpFetch(url, options) {
   let res
-  return fetch(window.restUrl + url.replace('/wp-json', '').slice(1), options)
+  return fetch(
+    window.restUrl + url.replace('/wp-json', '').slice(1),
+    Object.assign(options || {}, {
+      headers: Object.assign((options && options.headers) || {}, {
+        'X-WP-Nonce': window.wpNonce,
+      }),
+    })
+  )
     .then((r) => {
       res = r
       return r.json()
