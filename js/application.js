@@ -107,7 +107,7 @@ new Vue({
 
       // My application data
       draftIds,
-      editor: !draftIds.length && !window.user.ID ? this.emptyDraft() : null,
+      editor: null,
       myApplicationsPromise: null,
       myApplications: null,
     }
@@ -174,6 +174,10 @@ new Vue({
       url.hash = ''
       this.visitURL(url)
     },
+    removeDraft(app) {
+      delete window.localStorage['draft/' + app?.draftId?.replace('draft/', '')]
+      window.location.reload()
+    },
     async loadGroups() {
       this.allGroupsPromise = wpFetch('/wp-json/wp/v2/acf-field-group')
       this.allGroups = await this.allGroupsPromise
@@ -206,6 +210,7 @@ new Vue({
       const before = this.draftId
       this.draftId = url.searchParams.get('draftId') || ''
       if (!this.draftId && before) this.editor = null
+      console.log('scrointview')
       document.body.scrollIntoView()
 
       if (!back) window.history.pushState({}, '', url)

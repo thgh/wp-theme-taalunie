@@ -6,11 +6,10 @@
 */
 
 $data=[];
-show_admin_bar( false );
+// show_admin_bar( false );
 wp_enqueue_style( 'application', get_template_directory_uri() . '/css/application.css', [], '1');
 
-
-
+$current_user = wp_get_current_user();
 // $suppress_nav_menu = true;
 get_header();
 // /wp-json/wp/v2/acf-field
@@ -20,6 +19,11 @@ get_header();
 <div class="site-content__background">
   <div class="container container--tight pb-5">
     <div id="app" v-cloak>
+      <div v-if="user.ID" class="flex">Aangemeld als {{userData.display_name}}</div>
+      <div v-else class="flex my-40">
+        <p class="mb-1">We helpen jou om je aanvraag sneller in te vullen als je aangemeld bent.</p>
+        <a href="/wp-login.php" class="btn">Aanmelden</a>  
+      </div>
       <div v-if="editor">
 
         <a href="/" @click="visit">Terug naar overzicht van aanvragen</a>
@@ -61,6 +65,7 @@ get_header();
             <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
             <div class="application-status">Status: {{app.acf.status}}</div>
             <button @click="loadDraft(app.draftId)">Bewerken</button>
+            <button @click="removeDraft(app)">Verwijderen</button>
           </div>
 
           <div v-for="app in myApplications" class="application-card">
@@ -77,7 +82,7 @@ get_header();
 </div>
 
 <script>
-window.user = <?php echo json_encode(wp_get_current_user()) ?>;
+window.user = <?php echo json_encode($current_user) ?>;
 window.fieldGroups = <?php echo (json_encode($data)) ?>;
 window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
 window.wpNonce = <?php echo json_encode(wp_create_nonce('wp_rest')) ?>;

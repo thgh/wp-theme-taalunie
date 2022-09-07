@@ -1,3 +1,11 @@
+/* Admin bar */
+.page-template-application.admin-bar {
+  border-top: 32px solid black;
+}
+.page-template-application #wpadminbar {
+  position: absolute;
+}
+
 /* Application > Manager */
 .application-card {
   margin: 20px 0;
@@ -9,6 +17,13 @@
 }
 .application-type {
   white-space: pre-line;
+}
+
+.application-status-label {
+  background: #ccc;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 3px;
 }
 
 /* Application > Form */
