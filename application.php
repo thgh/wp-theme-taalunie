@@ -5,11 +5,16 @@
 * @package wp-theme-taalunie
 */
 
+// Require user to login first!
+$current_user = wp_get_current_user();
+if (empty($current_user->data))
+auth_redirect();
+
+
 $data=[];
 // show_admin_bar( false );
 wp_enqueue_style( 'application', get_template_directory_uri() . '/css/application.css', [], '1');
 
-$current_user = wp_get_current_user();
 // $suppress_nav_menu = true;
 get_header();
 // /wp-json/wp/v2/acf-field
@@ -18,6 +23,11 @@ get_header();
 
 <div class="site-content__background">
   <div class="container container--tight pb-5">
+
+Follow up on applications
+
+Submit new application
+
     <div id="app" v-cloak>
       <div v-if="user.ID" class="flex">Aangemeld als {{userData.display_name}}</div>
       <div v-else class="flex my-40">

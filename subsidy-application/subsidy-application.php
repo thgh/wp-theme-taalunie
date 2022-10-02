@@ -8,7 +8,57 @@ Author: Thomas Ghysels
 Author URI: https://thomasg.be
 Text Domain: subsidy, application
 */
+$applogs = [];
+define('SAVEQUERIES', true);
+add_action('shutdown', 'sql_logger');
+add_action('shutdown', 'endlog');
+function tlog($input) {
+  global $applogs;
+  $applogs[] = $input;
+}
 
+function endlog($input) {
+  global $applogs;
+  if (empty($applogs)) {
+    return;
+  }
+
+  $log_file = fopen(
+    ABSPATH . '/wp-content/themes/wp-theme-taalunie/_phplog.txt',
+    'a',
+  );
+  fwrite(
+    $log_file,
+    "//////////////////////////////////////////\n\n" .
+      date('F j, Y, g:i:s a') .
+      "\n",
+  );
+  fwrite(
+    $log_file,
+    $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'] . "\n",
+  );
+  foreach ($applogs as $line) {
+    fwrite($log_file, print_r($line, true) . "\n");
+  }
+  fclose($log_file);
+}
+function sql_logger() {
+  global $wpdb;
+  $log_file = fopen(
+    ABSPATH . '/wp-content/themes/wp-theme-taalunie/_sqllog.txt',
+    'a',
+  );
+  fwrite(
+    $log_file,
+    "//////////////////////////////////////////\n\n" .
+      date('F j, Y, g:i:s a') .
+      "\n",
+  );
+  foreach ($wpdb->queries as $q) {
+    fwrite($log_file, $q[0] . " - ($q[1] s)" . "\n\n");
+  }
+  fclose($log_file);
+}
 if (!defined('ABSPATH')) {
   exit(); // Exit if accessed directly
 }
@@ -245,6 +295,7 @@ add_filter('manage_application_posts_columns', function ($existing) {
   $columns['aanvrager'] = __('Aanvrager');
   // Don't put organisation first because it has multiple lines
   $columns['organisatie'] = __('Organisatie');
+  $columns['type'] = __('Type');
   $columns['status'] = __('Status');
   $columns['author'] = $existing['author'];
   $columns['date'] = $existing['date'];
@@ -258,7 +309,10 @@ add_action(
       $field = get_field('aanvrager', $post_id);
       $edit = get_edit_post_link($post_id);
       echo '<a href="' . esc_url($edit) . '">';
-      echo '<b style="font-size:.9rem">' . $field['naam'] . '</b>' . '<br>';
+      echo '<b style="font-size:.9rem">' .
+        (@$field['naam'] ?? '?') .
+        '</b>' .
+        '<br>';
       echo '</a>';
     }
     // Requester organisation
@@ -267,7 +321,7 @@ add_action(
 
       $edit = '';
       if (empty($field['organisatie'])) {
-        echo $field['organisatie_naam'] . '<br>';
+        echo (@$field['organisatie_naam'] ?? '?') . '<br>';
       } else {
         $edit = get_edit_post_link($field['organisatie']->ID);
         if ($edit) {
@@ -283,6 +337,17 @@ add_action(
         }
       }
       echo nl2br($field['organisatie_adres'] ?? '') . '';
+    }
+    if ('type' === $column) {
+      $field = get_field('type', $post_id);
+      if (!empty($field)) {
+        echo implode(
+          '<br>',
+          array_map(function ($item) {
+            return $item;
+          }, $field),
+        );
+      }
     }
     if ('status' === $column) {
       $field = get_field('status', $post_id);
@@ -307,7 +372,9 @@ add_action(
           break;
 
         default:
-          echo '<span style="background:#999">' . $field . '</span>';
+          echo '<span style="background:#000" class="application-status-label">' .
+            ($field ?? '?') .
+            '</span>';
           break;
       }
     }
@@ -385,12 +452,59 @@ add_action(
 // Access management > Limit visible applications
 add_action('pre_get_posts', function ($query) {
   if (!$query->query || empty($query->query['post_type'])) {
+    tlog('pre no query');
     // echo'<!--';
     // echo'<!--';
     // print_r($query);
     // echo'-->' . PHP_EOL;
     return;
   }
+  if ('wp_global_styles' === $query->query['post_type']) {
+    return;
+  }
+
+  tlog(
+    'pre type ' .
+      $query->query['post_type'] .
+      ' parent ' .
+      $query->query['post_parent'] .
+      ' limit ' .
+      $query->query['numberposts'],
+  );
+
+  // if ($query->query['post_type'] === 'revision') {
+  //   global $wpdb;
+  //   // id => post_type
+  //   // if application/organisation check
+  //   $results = $wpdb->get_results(
+  //     "SELECT post_type FROM {$wpdb->prefix}posts
+  //     WHERE ID = {}",
+  //     OBJECT,
+  //   );
+
+  //   if (empty($results)) {
+  //     print_r('forbidden');
+  //     print_r('forbidden');
+  //     print_r('forbidden');
+  //     $query->set('post_type', 'forbidden');
+  //     return;
+  //   }
+
+  //   // Filter the application by org ids
+  //   $query->set('meta_query', [
+  //     [
+  //       'key' => 'aanvrager_organisatie',
+  //       'value' => array_column($results, 'org_id'),
+  //       'compare' => 'IN',
+  //     ],
+  //   ]);
+  //   // print_r($results);
+  //   print_r(
+  //     '<br><br><br>resultsresultsresultsresultsresultsresultsresults' . PHP_EOL,
+  //   );
+  //   print_r($results);
+  //   // print_r($query);
+  // }
   if ($query->query['post_type'] === 'application') {
     // Admins can do everything!
     if (current_user_can('administrator')) {
@@ -447,6 +561,6 @@ function simplified_subsidy_data($data, $post, $request) {
     'id' => $data->data['id'],
     'slug' => $data->data['slug'],
     'acf' => $data->data['acf'],
-    'title' => $data->data['title']['rendered'],
+    'title' => @$data->data['title']['rendered'],
   ];
 }

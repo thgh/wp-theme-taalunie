@@ -74,6 +74,13 @@ Vue.component('Field', {
         this.$set(this.value, this.field.key, value)
       },
     },
+    enabled() {
+      if (!Array.isArray(this.field.settings.conditional_logic)) return true
+      return !this.field.settings.conditional_logic
+        .flatMap()
+        .flatMap()
+        .find((c) => c.field)
+    },
   },
   methods: {},
   mounted() {

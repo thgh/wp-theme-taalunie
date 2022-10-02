@@ -43,6 +43,10 @@ services:
     hostname: 'wordpress_mariadb'
     networks:
       - web-dev
+    ports:
+      - target: 3306
+        published: 3306
+        mode: host
     environment:
       MYSQL_ROOT_PASSWORD: 'rootpassword'
       MARIADB_DATABASE: 'wordpress'
