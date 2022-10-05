@@ -742,6 +742,8 @@ textarea {
   top: 100%;
   left: -999em;
   z-index: 99999;
+  /* 10px padding on parent - 20px padding on child */
+  margin-left: -10px;
 }
 
 .main-navigation ul ul ul {
@@ -755,19 +757,14 @@ textarea {
   left: auto;
 }
 
-.main-navigation ul ul a {
-  width: 200px;
-}
-
 .main-navigation ul li:hover > ul,
 .main-navigation ul li.focus > ul {
   left: auto;
 
   /* Taalunie custom */
   flex-direction: column;
-  background: white;
+  background: #fff;
   color: black;
-  margin-top: -12px;
 }
 
 .main-navigation li {
@@ -783,6 +780,20 @@ textarea {
 .main-navigation a:hover {
   text-decoration: underline;
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-navigation ul ul a {
+  min-width: 350px;
+  padding: 8px 20px;
+  line-height: 1.2em;
+}
+.main-navigation ul ul li:first-child a {
+  max-width: 350px;
+  padding: 8px 20px;
+  line-height: 1.2em;
+}
+.main-navigation ul ul a:hover {
+  background-color: #eee;
 }
 
 .menu-toggle {
@@ -1335,7 +1346,7 @@ html {
   padding-bottom: 20px;
   overflow-x: auto;
   margin-top: -30px;
-  transition: padding .2s, margin .2s;
+  transition: padding 0.2s, margin 0.2s;
 }
 .nav-sticky--low {
   padding-top: 80px;
@@ -1519,7 +1530,7 @@ html {
   padding: 12px;
   border: none;
   background: none;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 .goal-remove:hover {
   transform: rotate(90deg);
