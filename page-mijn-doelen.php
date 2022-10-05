@@ -1,6 +1,6 @@
 <?php
 /**
- * The mijn-doelen template file
+ * Template Name: Mijn doelen
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
