@@ -463,14 +463,14 @@ add_action('pre_get_posts', function ($query) {
     return;
   }
 
-  tlog(
-    'pre type ' .
-      $query->query['post_type'] .
-      ' parent ' .
-      $query->query['post_parent'] .
-      ' limit ' .
-      $query->query['numberposts'],
-  );
+  // tlog(
+  //   'pre type ' .
+  //     $query->query['post_type'] .
+  //     ' parent ' .
+  //     $query->query['post_parent'] .
+  //     ' limit ' .
+  //     $query->query['numberposts'],
+  // );
 
   // if ($query->query['post_type'] === 'revision') {
   //   global $wpdb;

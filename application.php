@@ -1,61 +1,67 @@
 <?php
+
 /**
-* Template Name: Aanvraag formulier
-*
-* @package wp-theme-taalunie
-*/
+ * Template Name: Aanvraag formulier
+ *
+ * @package wp-theme-taalunie
+ */
 
 // Require user to login first!
 $current_user = wp_get_current_user();
 if (empty($current_user->data))
-auth_redirect();
+  auth_redirect();
 
 
-$data=[];
+$data = [];
 // show_admin_bar( false );
-wp_enqueue_style( 'application', get_template_directory_uri() . '/css/application.css', [], '1');
+wp_enqueue_style('application', get_template_directory_uri() . '/css/application.css', [], '1');
 
 // $suppress_nav_menu = true;
 get_header();
 // /wp-json/wp/v2/acf-field
-  ?>
-<style>:root { margin-top: 0 !important; }</style>
+?>
+<style>
+  :root {
+    margin-top: 0 !important;
+  }
+</style>
 
-<div class="site-content__background">
-  <div class="container container--tight pb-5">
+<div class="site-content__background" id="app" v-cloak>
+  <div class="container container--tight py-5">
 
-Follow up on applications
+    <!-- Sign in first! -->
+    <div v-if="!user.ID" class="flex my-40">
+      <h1>Aanvraag indienen of opvolgen?</h1>
 
-Submit new application
+      <p class="mb-1">We helpen jou om je aanvraag sneller in te vullen als je aangemeld bent.</p>
+      <a href="/wp-login.php?option=oauthredirect&app_name=mijnNederlands&redirect_to=/" class="btn">Aanmelden</a>
+    </div>
 
-    <div id="app" v-cloak>
-      <div v-if="user.ID" class="flex">Aangemeld als {{userData.display_name}}</div>
-      <div v-else class="flex my-40">
-        <p class="mb-1">We helpen jou om je aanvraag sneller in te vullen als je aangemeld bent.</p>
-        <a href="/wp-login.php" class="btn">Aanmelden</a>  
-      </div>
+    <!-- Follow up on my applications -->
+    <div v-else>
+      <div class="flex">Aangemeld als {{userData.display_name}}</div>
+
       <div v-if="editor">
 
         <a href="/" @click="visit">Terug naar overzicht van aanvragen</a>
 
         <h1>Aanvraag opstellen</h1>
 
-        <form class="fieldGroup checked" v-for="(section, index) of rootFields" >
+        <form class="fieldGroup checked" v-for="(section, index) of rootFields">
           <div class="fieldGroup__title">
             <div class="flex-grow-1">{{section.title}}</div>
-            <button class="fieldGroup-toggle" type="button"  data-toggle="collapse" :data-target="'#collapse' + index" aria-expanded="true" :aria-controls="'#collapse' + index" >
-              <svg  class=" d-print-none" style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+            <button class="fieldGroup-toggle" type="button" data-toggle="collapse" :data-target="'#collapse' + index" aria-expanded="true" :aria-controls="'#collapse' + index">
+              <svg class=" d-print-none" style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
               </svg>
             </button>
           </div>
-          <fieldset :id="'collapse' + index"  class="collapse show" aria-labelledby="headingOne">
+          <fieldset :id="'collapse' + index" class="collapse show" aria-labelledby="headingOne">
             <div v-for="(field, index) of section.children" class="mb-4">
-  <!-- <pre>{{field.settings.type}}</pre> -->
-            <!-- <pre>{{section}}</pre>qsdf -->
+              <!-- <pre>{{field.settings.type}}</pre> -->
+              <!-- <pre>{{section}}</pre>qsdf -->
               <label>{{field.title}}</label>
-              <Field :value="editor.acf[section.key]" @change="$set(editor.acf, section.key, $event)" :field="field"/>
+              <Field :value="editor.acf[section.key]" @change="$set(editor.acf, section.key, $event)" :field="field" />
             </div>
 
             <Field v-if="!section.children.length" :value="editor.acf" @change="$set(editor.acf, section.key, $event)" :field="section"></Field>
@@ -71,20 +77,20 @@ Submit new application
         </div>
 
         <div v-for="app in drafts" class="application-card">
-            <h2>{{app.title || app.acf.aanvrager?.organisatie_naam||'Draft in browser'}}</h2>
-            <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
-            <div class="application-status">Status: {{app.acf.status}}</div>
-            <button @click="loadDraft(app.draftId)">Bewerken</button>
-            <button @click="removeDraft(app)">Verwijderen</button>
-          </div>
+          <h2>{{app.title || app.acf.aanvrager?.organisatie_naam||'Draft in browser'}}</h2>
+          <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
+          <div class="application-status">Status: {{app.acf.status}}</div>
+          <button @click="loadDraft(app.draftId)">Bewerken</button>
+          <button @click="removeDraft(app)">Verwijderen</button>
+        </div>
 
-          <div v-for="app in myApplications" class="application-card">
-            <h2>{{app.title || app.acf.aanvrager?.organisatie_naam}}</h2>
-            <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
-            <div class="application-status">Status: {{app.acf.status}}</div>
-            <button v-if="app.acf.status === 'draft'" @click="editor = app">Bewerken</button>
-            <button v-if="app.acf.status === 'draft'" @click="review(app)">Indienen</button>
-          </div>
+        <div v-for="app in myApplications" class="application-card">
+          <h2>{{app.title || app.acf.aanvrager?.organisatie_naam}}</h2>
+          <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
+          <div class="application-status">Status: {{app.acf.status}}</div>
+          <button v-if="app.acf.status === 'draft'" @click="editor = app">Bewerken</button>
+          <button v-if="app.acf.status === 'draft'" @click="review(app)">Indienen</button>
+        </div>
 
       </div>
     </div>
@@ -92,10 +98,10 @@ Submit new application
 </div>
 
 <script>
-window.user = <?php echo json_encode($current_user) ?>;
-window.fieldGroups = <?php echo (json_encode($data)) ?>;
-window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
-window.wpNonce = <?php echo json_encode(wp_create_nonce('wp_rest')) ?>;
+  window.user = <?php echo json_encode($current_user) ?>;
+  window.fieldGroups = <?php echo (json_encode($data)) ?>;
+  window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
+  window.wpNonce = <?php echo json_encode(wp_create_nonce('wp_rest')) ?>;
 </script>
 <?php
 wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.js', []);
