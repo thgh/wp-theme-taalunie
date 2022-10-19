@@ -26,8 +26,8 @@ get_header();
   }
 </style>
 
-<div class="site-content__background" id="app" v-cloak>
-  <div class="container container--tight py-5">
+<div class="site-content__background">
+  <div class="container container--tight py-5" id="app" v-cloak>
 
     <!-- Sign in first! -->
     <div v-if="!user.ID" class="flex my-40">
@@ -39,15 +39,16 @@ get_header();
 
     <!-- Follow up on my applications -->
     <div v-else>
-      <div class="flex">Aangemeld als {{userData.display_name}}</div>
 
+      <!-- Edit a draft or application -->
       <div v-if="editor">
 
         <a href="/" @click="visit">Terug naar overzicht van aanvragen</a>
 
-        <h1>Aanvraag opstellen</h1>
+        <h1 v-if="editable">Aanvraag opstellen</h1>
+        <h1 v-else>Aanvraag bekijken</h1>
 
-        <form class="fieldGroup checked" v-for="(section, index) of rootFields">
+        <form class="fieldGroup checked" v-for="(section, index) of visibleFields" :aria-readonly="editable">
           <div class="fieldGroup__title">
             <div class="flex-grow-1">{{section.title}}</div>
             <button class="fieldGroup-toggle" type="button" data-toggle="collapse" :data-target="'#collapse' + index" aria-expanded="true" :aria-controls="'#collapse' + index">
@@ -70,42 +71,58 @@ get_header();
         <pre>{{editor}}</pre>
       </div>
       <div v-else>
+
+        <!-- Overview of all my applications -->
         <h1>Mijn aanvragen</h1>
 
         <div>
-          <button type="button" @click="editor = emptyDraft()">Nieuwe aanvraag</button>
+          <button class="btn btn-view" type="button" @click="createDraft()">Nieuwe aanvraag</button>
         </div>
+
+        <div v-if="drafts.length">Niet bewaarde aanvragen</div>
 
         <div v-for="app in drafts" class="application-card">
           <h2>{{app.title || app.acf.aanvrager?.organisatie_naam||'Draft in browser'}}</h2>
-          <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
+          <div class="application-type">{{types(app).length>1?'Subsidies':'Subsidie'}}: {{types(app).join(', ')}}</div>
           <div class="application-status">Status: {{app.acf.status}}</div>
-          <button @click="loadDraft(app.draftId)">Bewerken</button>
-          <button @click="removeDraft(app)">Verwijderen</button>
+          <button class="btn btn-view" @click="edit(app)">Bewerken</button>
+          <button class="btn btn-duplicate" @click="duplicate(app)">Dupliceren</button>
+          <button class="btn btn-remove" @click="removeDraft(app)">Verwijderen</button>
         </div>
+
+        <div v-if="drafts.length">Bewaarde aanvragen</div>
 
         <div v-for="app in myApplications" class="application-card">
           <h2>{{app.title || app.acf.aanvrager?.organisatie_naam}}</h2>
-          <div class="application-type">{{app.acf.type?.length>1?'Subsidies':'Subsidie'}}: {{(app.acf.type || []).join(', ')}}</div>
+          <div class="application-type">{{types(app).length>1?'Subsidies':'Subsidie'}}: {{types(app).join(', ')}}</div>
           <div class="application-status">Status: {{app.acf.status}}</div>
-          <button v-if="app.acf.status === 'draft'" @click="editor = app">Bewerken</button>
-          <button v-if="app.acf.status === 'draft'" @click="review(app)">Indienen</button>
+          <div class="d-flex" style="gap: 10px">
+            <button class="btn btn-view" v-if="isEditable(app)" @click="edit(app)">Bewerken</button>
+            <button class="btn btn-view" v-else @click="edit(app)">Bekijken</button>
+            <button class="btn btn-review" v-if="app.acf.status === 'draft'" @click="review(app)">Indienen</button>
+            <button class="btn btn-remove" v-if="app.acf.status === 'draft'" @click="remove(app)">Verwijderen</button>
+
+            <div style="flex:1"></div>
+            <button class="btn btn-duplicate" v-if="app.acf.status === 'draft'" @click="duplicate(app)">Dupliceren</button>
+          </div>
         </div>
 
       </div>
     </div>
+    <pre>{{allowedFields}}</pre>
   </div>
 </div>
 
 <script>
   window.user = <?php echo json_encode($current_user) ?>;
   window.fieldGroups = <?php echo (json_encode($data)) ?>;
-  window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
+  window.restUrl = <?php echo json_encode(get_rest_url()) ?> //.replace('/wp-json', '/index.php/wp-json');
   window.wpNonce = <?php echo json_encode(wp_create_nonce('wp_rest')) ?>;
 </script>
 <?php
 wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.js', []);
-wp_register_script('collapse', 'https://unpkg.com/bootstrap@4.4.1', ['jquery']);
-wp_register_script('application', get_template_directory_uri() . '/js/application.js', ['vue', 'collapse'], '1');
+wp_register_script('collapse', 'https://unpkg.com/bootstrap@4.4.1/dist/js/bootstrap.js', ['jquery']);
+wp_register_script('axios', 'https://unpkg.com/axios@1.1.2/dist/axios.min.js', []);
+wp_register_script('application', get_template_directory_uri() . '/js/application.js', ['collapse'], '1');
 wp_enqueue_script('application');
 get_footer();

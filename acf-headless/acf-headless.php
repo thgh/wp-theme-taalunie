@@ -49,13 +49,15 @@ add_action('rest_api_init', function () {
 // Throw away all useless info
 add_filter('rest_prepare_acf-field-group', 'simplified_acf_data', 10, 3);
 add_filter('rest_prepare_acf-field', 'simplified_acf_data', 10, 3);
-function simplified_acf_data($data, $post, $request) {
+function simplified_acf_data($data, $post, $request)
+{
   return [
     'id' => $data->data['id'],
     'parent' => $data->data['parent'],
     'key' => $data->data['key'],
     'slug' => $data->data['slug'],
-    'title' => $data->data['title']['rendered'],
+    'title' => @$data->data['title']['rendered'],
     'settings' => $data->data['settings'],
+    'menu_order' => $post->menu_order
   ];
 }

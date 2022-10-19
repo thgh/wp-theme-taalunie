@@ -22,12 +22,12 @@ services:
   php:
     image: serversideup/php:8.0-fpm-apache
     environment:
-      APACHE_DOCUMENT_ROOT: '/var/www/html/public/'
+      APACHE_DOCUMENT_ROOT: '/var/www/html/'
     volumes:
-      - ./public:/var/www/html/public
-      - ./acf-headless:/var/www/html/public/wp-content/plugins/acf-headless
-      - ./subsidy-application:/var/www/html/public/wp-content/plugins/subsidy-application
-      - .:/var/www/html/public/wp-content/themes/wp-theme-taalunie
+      - ./public:/var/www/html
+      - ./acf-headless:/var/www/html/wp-content/plugins/acf-headless
+      - ./subsidy-application:/var/www/html/wp-content/plugins/subsidy-application
+      - .:/var/www/html/wp-content/themes/wp-theme-taalunie
     networks:
       - web-dev
     labels:

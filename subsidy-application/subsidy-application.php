@@ -12,12 +12,14 @@ $applogs = [];
 define('SAVEQUERIES', true);
 add_action('shutdown', 'sql_logger');
 add_action('shutdown', 'endlog');
-function tlog($input) {
+function tlog($input)
+{
   global $applogs;
   $applogs[] = $input;
 }
 
-function endlog($input) {
+function endlog($input)
+{
   global $applogs;
   if (empty($applogs)) {
     return;
@@ -42,7 +44,8 @@ function endlog($input) {
   }
   fclose($log_file);
 }
-function sql_logger() {
+function sql_logger()
+{
   global $wpdb;
   $log_file = fopen(
     ABSPATH . '/wp-content/themes/wp-theme-taalunie/_sqllog.txt',
@@ -556,7 +559,8 @@ add_action('pre_get_posts', function ($query) {
 // Throw away all useless info
 add_filter('rest_prepare_application', 'simplified_subsidy_data', 10, 3);
 add_filter('rest_prepare_organisation', 'simplified_subsidy_data', 10, 3);
-function simplified_subsidy_data($data, $post, $request) {
+function simplified_subsidy_data($data, $post, $request)
+{
   return [
     'id' => $data->data['id'],
     'slug' => $data->data['slug'],
@@ -564,3 +568,30 @@ function simplified_subsidy_data($data, $post, $request) {
     'title' => @$data->data['title']['rendered'],
   ];
 }
+
+// Get orgs from other server
+add_action('rest_api_init', function () {
+  register_rest_route('subsidy-application', '/organisations', [
+    'methods' => 'GET',
+    'callback' => function () {
+      // Cached
+      $cache = get_transient('taalunie_orgs');
+      if ($cache !== false) return $cache;
+
+      // Fresh
+      $json = file_get_contents('https://mijnnederlands.taalunie.org/wp-json/wp/v2/organisatie-profielp?per_page=100');
+      $orgs = array_map(function ($item) {
+        return [
+          'id' => $item['id'],
+          'slug' => $item['slug'],
+          'acf' => $item['acf'],
+          'content' => $item['content'],
+          'title' => @$item['title']['rendered'],
+        ];
+      }, json_decode($json, true));
+
+      set_transient('taalunie_orgs', $orgs, HOUR_IN_SECONDS);
+      return $orgs;
+    },
+  ]);
+});

@@ -6,6 +6,45 @@
   position: absolute;
 }
 
+/* Buttons */
+.btn.btn-review {
+  background-color: rgba(255, 166, 0, 0.1);
+  border-color: orange;
+}
+
+.btn.btn-review:hover {
+  background-color: rgba(189, 123, 0, 0.2);
+  border-color: rgb(181, 118, 0);
+}
+
+.btn.btn-view {
+  background-color: rgba(0, 175, 202, 0.1);
+  border-color: #00b0ca;
+}
+.btn.btn-view:hover {
+  background-color: rgba(0, 131, 151, 0.2);
+  border-color: #007486;
+}
+
+.btn.btn-duplicate {
+  background-color: rgba(0, 175, 202, 0.1);
+  border-color: #00b0ca;
+}
+
+.btn.btn-duplicate:hover {
+  background-color: rgba(0, 131, 151, 0.2);
+  border-color: #007486;
+}
+
+.btn.btn-remove {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-color: red;
+}
+.btn.btn-remove:hover {
+  background-color: rgba(228, 0, 0, 0.2);
+  border-color: rgb(163, 0, 0);
+}
+
 /* Application > Manager */
 .application-card {
   margin: 20px 0;
@@ -176,4 +215,34 @@
 .fieldGroup__icon {
   width: 24px;
   margin-right: 30px;
+}
+
+/* Form > select org */
+
+#autosuggest__input {
+  width: 300px;
+  max-width: 100%;
+}
+.autosuggest__results-container {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.autosuggest__results ul {
+  background-color: #f8f8f8;
+  box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 1px 0 10px;
+  padding: 0;
+}
+.autosuggest__results-item {
+  padding: 4px 8px;
+}
+/* .autosuggest__results-item:hover {
+  padding: 4px 8px;
+} */
+.autosuggest__results-item--highlighted {
+  background-color: #08b589;
+  color: white;
 }
