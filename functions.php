@@ -169,6 +169,52 @@ function taak_query_sort_asc($query)
     }
 };
 
+
+
+function my_theme_add_new_features() {
+    add_theme_support( 'editor-color-palette', [
+        [
+            'name' => 'Wit',
+            'slug' => 'white',
+            'color' => '#ffffff',
+        ],
+        [
+            'name' => 'Grijs',
+            'slug' => 'gray',
+            'color' => '#F3F3F3',
+        ],
+        [
+            'name' => 'Taalunie logo kleur',
+            'slug' => 'primary',
+            'color' => '#00A0C6',
+        ],
+        [
+            'name' => 'Taalunie logo blauw',
+            'slug' => 'blue',
+            'color' => '#19142E',
+        ],
+        [
+            'name' => 'Zachte achtergrond',
+            'slug' => 'soft',
+            'color' => '#EBF2F7',
+        ],
+        [
+            'name' => 'Donker',
+            'slug' => 'dark',
+            'color' => '#182B49',
+        ],
+        [
+            'name' => 'Donker',
+            'slug' => 'darkest',
+            'color' => '#08234E',
+        ],
+    ]);
+}
+add_action( 'after_setup_theme', 'my_theme_add_new_features' );
+
+
+
+
 /**
  * HSN
  */
