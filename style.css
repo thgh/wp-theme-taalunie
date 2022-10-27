@@ -2653,25 +2653,35 @@ a .bundel-mini:focus {
 
 /* NT2 beginnersdoelen content */
 
-.columns--cards {
-    background: #ebf2f7;
+.wp-block-group.has-background, .wp-block-columns.has-background {
     margin-left: -15px;
     margin-right: -15px;
 }
 
-.columns--cards>.wp-block-column {
+.wp-block-columns.has-background {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.has-background .wp-block-column {
     background: white;
     padding: 1px 20px 20px;
     box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
 }
 
 @media (min-width: 1130px) {
-    .columns--cards {
-	padding: 40px;
+    .wp-block-group.has-background, .wp-block-columns.has-background {
+        padding-top: 4px;
+        padding-bottom: 4px;
         margin-left: calc(550px - 50vw);
         padding-left: calc(50vw - 550px);
         margin-right: calc(550px - 50vw);
         padding-right: calc(50vw - 550px);
+    }
+
+    .wp-block-columns.has-background {
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 }
 
@@ -2679,7 +2689,6 @@ a .bundel-mini:focus {
     padding-left: 15px;
     padding-right: 15px;
 }
-
 
 /* Vue */
 
