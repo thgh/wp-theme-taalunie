@@ -14,6 +14,7 @@
 
 get_header();
 
+global $post;
 print_r($post);
 ?>
 	<div id="primary" class="content-area">
