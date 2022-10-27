@@ -15,20 +15,26 @@
 get_header();
 
 global $post;
+$withSiblings = false;
+if ($post->post_parent) {
+	$siblings = wp_list_pages(['child_of' => $post->post_parent]);
+	$withSiblings = count($siblings) > 1;
+}
 ?>
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main <?php if ($post->post_parent) echo ' has-parent'; ?>">
-
-		<?php if ($post->post_parent): ?>
-			<div>
-<ul>
-<li>azer
-	<li>qsdf
-		</ul>
-		</div>
-		<?php endif; ?>
+		<main id="main" class="site-main <?php if ($withSiblings) echo ' has-siblings'; ?>">
 
 		<?php
+		if ($withSiblings) {
+			echo '<div class="siblings"> <ul class="siblings-list">';
+			foreach ($siblings as $sibling) {
+				?>
+				<li class="sibling"><?php echo $sibling->post_title; ?></li>
+				<?php
+			}
+			echo '</ul> </div>';
+		} 
+		
 		while ( have_posts() ) :
 			the_post();
 
