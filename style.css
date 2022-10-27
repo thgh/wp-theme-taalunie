@@ -1782,6 +1782,7 @@ h2 {
 }
 .site-content__background {
   padding-top: 1px;
+  padding-bottom: 40px;
   min-height: calc(100vh - 95px);
   background-color: #eaf2f6;
 }
@@ -1790,6 +1791,7 @@ h2 {
   .site-content,
   .site-content__background {
     padding-top: 0;
+    padding-bottom: 0;
     min-height: auto;
     background: none;
   }
@@ -2685,10 +2687,48 @@ a .bundel-mini:focus {
     }
 }
 
+.catalogus-link {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .has-catalogus-link {
+        display: flex;
+    }
+
+    .has-catalogus-link .site-branding {
+        flex-grow: 1;
+    }
+
+    .catalogus-link {
+        padding-left: 24px;
+        padding-right: 15px;
+        margin-right: -15px;
+        background: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #182B49!important;
+    }
+
+    .catalogus-link::after {
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin-left: 12px;
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23182B49' d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z' /%3E%3C/svg%3E");
+    }
+}
+
 .site-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+.page-template-page-doelen-wizard .site-content,
+.post-type-archive-taak .site-content {
+  padding: 0;
+}
+	
 
 /* Vue */
 
