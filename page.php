@@ -15,12 +15,11 @@
 get_header();
 
 global $post;
-print_r($post);
 ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main <?php if ($post->post_parent) echo ' has-parent'; ?>">
 
-		<?php if ($post->post_parent) :?>
+		<?php if ($post->post_parent): ?>
 			<div>
 <ul>
 <li>azer
