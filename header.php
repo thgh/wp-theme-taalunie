@@ -43,7 +43,7 @@
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'hsn-theme');?></a>
 
     <header id="masthead" class="site-header">
-      <div class="container">
+      <div class="container has-catalogus-link">
         <div class="site-branding">
           <?php
 the_custom_logo();
@@ -59,6 +59,8 @@ else:
           <?php
 endif;?>
         </div><!-- .site-branding -->
+
+        <a class="catalogus-link" href="/taak/">Naar de catalogus</a>
       </div><!-- .container -->
       <?php
 			global $suppress_nav_menu;
