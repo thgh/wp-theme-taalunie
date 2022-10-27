@@ -23,9 +23,9 @@ $withSiblings = !!$post->post_parent;
 
 		<?php
 		if ($withSiblings) {
-			echo '<div class="siblings">';
+			echo '<ul class="siblings">';
 			wp_list_pages(['child_of' => $post->post_parent, 'title_li' => '']);
-			echo '</div>';
+			echo '</ul>';
 		} 
 		
 		while ( have_posts() ) :
