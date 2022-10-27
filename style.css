@@ -2738,6 +2738,7 @@ a .bundel-mini:focus {
 .wp-block-button__link.has-background {
   text-transform: uppercase;
   font-size: 15px;
+  font-weight: 600;
   line-height: 1em;
   padding-top: .667em;
   padding-bottom: .667em;
