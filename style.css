@@ -2746,6 +2746,56 @@ a .bundel-mini:focus {
   padding-bottom: .667em;
 }
 	
+.has-siblings {
+  display: flex;
+}
+
+@media (max-width: 699px) {
+  .has-siblings {
+      flex-direction: column;
+  }
+
+  .has-siblings>.page {
+      order: -1
+  }
+
+  .siblings {
+      flex-basis: 40%;
+      margin: 0;
+      padding: 0 0 60px;
+  }
+}
+
+@media (min-width: 700px) {
+  .has-siblings>.page {
+      flex-basis: 60%;
+  }
+
+  .siblings {
+      flex-basis: 40%;
+      margin: 0;
+      padding: 112px 25px 100px 0;
+  }
+}
+
+.siblings li {
+  list-style-type: none;
+}
+
+.siblings a {
+  display: block;
+  padding: .3em 0;
+  color: #182B49;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 500;
+}
+
+.siblings .current_page_item a {
+  font-weight: bold;
+  text-decoration: underline;
+}
 
 /* Vue */
 
