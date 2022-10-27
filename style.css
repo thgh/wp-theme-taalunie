@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap);
 /*!
 Theme Name: taalunie
 Theme URI: https://github.com/thgh/wp-taalunie-theme
@@ -93,18 +94,6 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
   font-weight: bold;
   font-style: italic;
 }
-@font-face {
-  font-family: 'Kievit Slab';
-  src: url('./font/KievitSlabWeb.eot?') format('eot'),
-    url('./font/KievitSlabWeb.woff') format('woff'),
-    url('./font/KievitSlabWeb.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Kievit Slab Small Caps';
-  src: url('./font/KievitSlabScWeb.eot?') format('eot'),
-    url('./font/KievitSlabScWeb.woff') format('woff'),
-    url('./font/KievitSlabScWeb.ttf') format('truetype');
-}
 
 /*--------------------------------------------------------------
 # Generic
@@ -152,6 +141,9 @@ main {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
+  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-size: 2em;
   margin: 0.67em 0;
 }
@@ -717,7 +709,7 @@ textarea {
   background-color: #08234e;
   color: white;
 
-  font: 16px/1.6 'Kievit Slab', Georgia, Arial, -apple-system,
+  font: 16px/1.6 'Kievit', Georgia, Arial, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji' !important;
@@ -803,7 +795,7 @@ textarea {
   margin: 10px;
 
   background: rgba(0, 0, 0, 0.1);
-  font: 'Kievit Slab', Georgia, Arial, -apple-system, BlinkMacSystemFont,
+  font: Kievit, Georgia, Arial, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
   font-weight: bold;
@@ -1765,16 +1757,24 @@ html {
 
 h1 {
   color: #212d4c;
-  font-size: 36px;
+  font-size: 48px;
   font-weight: 700;
-  font-family: Kievit Slab;
-  line-height: 44px;
+  line-height: 54px;
 }
 h2 {
   margin: 2em 0;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 44px;
+  line-height: 32px;
+}
+h3 {
+  font-size: 20px;
+  line-height: 24px;
+}
+h1, h2, h3 {
+  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .site-content {
