@@ -134,6 +134,7 @@ body {
  */
 main {
   display: block;
+  width: 100%;
 }
 
 /**
