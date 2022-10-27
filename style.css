@@ -2651,6 +2651,36 @@ a .bundel-mini:focus {
   text-decoration: underline;
 }
 
+/* NT2 beginnersdoelen content */
+
+.columns--cards {
+    background: #ebf2f7;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.columns--cards>.wp-block-column {
+    background: white;
+    padding: 1px 20px 20px;
+    box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+}
+
+@media (min-width: 1130px) {
+    .columns--cards {
+	padding: 40px;
+        margin-left: calc(550px - 50vw);
+        padding-left: calc(50vw - 550px);
+        margin-right: calc(550px - 50vw);
+        padding-right: calc(50vw - 550px);
+    }
+}
+
+.site-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
 /* Vue */
 
 [v-cloak] {
