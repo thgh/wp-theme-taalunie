@@ -2700,14 +2700,14 @@ a .bundel-mini:focus {
         flex-grow: 1;
     }
 
-    .catalogus-link {
+    body .catalogus-link {
         padding-left: 24px;
         padding-right: 15px;
         margin-right: -15px;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #182B49!important;
+        color: #182B49;
     }
 
     .catalogus-link::after {
@@ -2722,7 +2722,7 @@ a .bundel-mini:focus {
   color: white;
 }
 .page-template-page-doelen-wizard .catalogus-link::after {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 }
 
@@ -2733,6 +2733,14 @@ a .bundel-mini:focus {
 .page-template-page-doelen-wizard .site-content,
 .post-type-archive-taak .site-content {
   padding: 0;
+}
+
+.wp-block-button__link.has-background {
+  text-transform: uppercase;
+  font-size: 15px;
+  line-height: 1em;
+  padding-top: .667em;
+  padding-bottom: .667em;
 }
 	
 
