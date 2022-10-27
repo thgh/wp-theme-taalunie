@@ -13,6 +13,9 @@
  */
 
 get_header();
+
+$post = get_the_post();
+print_r($post);
 ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
