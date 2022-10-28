@@ -6,7 +6,7 @@ new Vue({
   data() {
     const url = new URL(window.location.href)
     return {
-      p: url.searchParams.get('p') || '',
+      ik: url.searchParams.get('ik') || '',
       region: url.searchParams.get('regio') || '',
       categorySlug: url.searchParams.get('category') || '',
       step: url.searchParams.get('step') || '',
@@ -119,7 +119,7 @@ new Vue({
       this.visitURL(url, false)
     },
     visitURL(url, back = false) {
-      this.p = url.searchParams.get('p') || ''
+      this.ik = url.searchParams.get('ik') || ''
       this.region = url.searchParams.get('regio') || ''
       this.categorySlug = url.searchParams.get('category') || ''
       this.step = url.searchParams.get('step') || ''
@@ -211,7 +211,7 @@ new Vue({
     )
   },
   watch: {
-    p() {
+    ik() {
       if (!this.categoriesPromise) this.loadCategories()
     },
     region(r) {
