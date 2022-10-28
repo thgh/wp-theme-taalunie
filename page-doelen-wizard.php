@@ -236,7 +236,7 @@ window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
 </script>
 <?php
 wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.min.js', []);
-wp_register_script('home-custom', get_template_directory_uri() . '/js/home.js', ['vue'], '1');
+wp_register_script('home-custom', get_template_directory_uri() . '/js/home.js', ['vue'], '2');
 wp_enqueue_script('home-custom');
 
 get_footer();
