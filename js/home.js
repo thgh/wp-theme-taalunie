@@ -211,11 +211,14 @@ new Vue({
     )
   },
   watch: {
-    ik() {
+    ik(wil) {
       if (!this.categoriesPromise) this.loadCategories()
     },
     region(r) {
       if (r && !this.categoriesPromise) this.loadCategories()
+      
+      if (r) document.body.classList.remove('no-catalogus-link')
+      else document.body.classList.add('no-catalogus-link')
     },
     selection() {
       persist('selection', this.selection)
