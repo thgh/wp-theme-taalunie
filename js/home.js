@@ -209,6 +209,10 @@ new Vue({
       },
       false
     )
+    
+    
+      if (this.region) document.body.classList.remove('no-catalogus-link')
+      else document.body.classList.add('no-catalogus-link')
   },
   watch: {
     ik(wil) {
