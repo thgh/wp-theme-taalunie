@@ -2729,7 +2729,7 @@ a .bundel-mini:focus {
 
     .page-template-page-doelen-wizard .catalogus-begeleider::after {
         transform: rotate(-90deg);
-        color: white;
+        color: white
     }
 
     .no-catalogus-link .catalogus-link {
