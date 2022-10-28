@@ -60,7 +60,8 @@ else:
 endif;?>
         </div><!-- .site-branding -->
 
-        <a class="catalogus-link" href="/taak/">Naar de catalogus</a>
+        <a class="catalogus-link catalogus-leren" href="/?ik=leren">Naar de catalogus</a>
+        <a class="catalogus-link catalogus-begeleider" href="/nt2-beginnersdoelen/">Home</a>
       </div><!-- .container -->
       <?php
 			global $suppress_nav_menu;
