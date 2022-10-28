@@ -2725,11 +2725,11 @@ a .bundel-mini:focus {
 
     .page-template-default .catalogus-leren {
         display: flex;
-        color: white;
     }
 
     .page-template-page-doelen-wizard .catalogus-begeleider::after {
         transform: rotate(-90deg);
+        color: white;
     }
 
     .no-catalogus-link .catalogus-link {
