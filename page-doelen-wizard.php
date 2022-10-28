@@ -11,9 +11,9 @@ $suppress_nav_menu = true;
 get_header();
 ?>
 <div id="app" class="site-content__background">
-  <div class="modal-body" v-if="!p" <?php echo isset($_GET['p']) ? ' v-cloak': '' ?>>
+  <div class="modal-body" v-if="!ik" <?php echo isset($_GET['ik']) ? ' v-cloak': '' ?>>
     <div class="modal-options">
-      <a class="modal-option" href="/?p=leren" @click="visit">
+      <a class="modal-option" href="/?ik=leren" @click="visit">
         <div class="modal-option__text">
           Ik leer Nederlands.
         </div>
@@ -31,14 +31,14 @@ get_header();
   </div>
   <div class="modal-body" v-else-if="!region" v-cloak>
     <div class="modal-options">
-      <a class="modal-option" href="/?p=leren&regio=nl" @click="visit">
+      <a class="modal-option" href="/?ik=leren&regio=nl" @click="visit">
         <div class="modal-option__text">
           Ik woon in Nederland.
         </div>
         <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in nederland.svg"
           alt="">
       </a>
-      <a class="modal-option" href="/?p=leren&regio=be" @click="visit">
+      <a class="modal-option" href="/?ik=leren&regio=be" @click="visit">
         <div class="modal-option__text">
           Ik woon in België.
         </div>
@@ -226,7 +226,7 @@ get_header();
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else v-cloak>
     Step={{step}}
   </div>
 </div>
@@ -235,7 +235,7 @@ get_header();
 window.restUrl = <?php echo json_encode(get_rest_url()) ?>;
 </script>
 <?php
-wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.js', []);
+wp_register_script('vue', 'https://unpkg.com/vue@2.6.14/dist/vue.min.js', []);
 wp_register_script('home-custom', get_template_directory_uri() . '/js/home.js', ['vue'], '1');
 wp_enqueue_script('home-custom');
 
