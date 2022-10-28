@@ -2702,9 +2702,6 @@ a .bundel-mini:focus {
         flex-grow: 1;
     }
 
-    .page-template-page-doelen-wizard .catalogus-link {
-    }
-
     body .catalogus-link {
         padding-left: 24px;
         padding-right: 15px;
@@ -2733,6 +2730,10 @@ a .bundel-mini:focus {
 
     .page-template-default .catalogus-begeleider::after {
         transform: rotate(-90deg);
+    }
+
+    .no-catalogus-link .catalogus-link {
+	display: none
     }
 }
 
