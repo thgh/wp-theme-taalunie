@@ -60,7 +60,7 @@ else:
 endif;?>
         </div><!-- .site-branding -->
 
-        <a class="catalogus-link catalogus-leren" href="/?ik=leren">Naar de catalogus</a>
+        <a class="catalogus-link catalogus-leren" href="/?ik=leren">Naar de leerdoelen</a>
         <a class="catalogus-link catalogus-begeleider" href="/nt2-beginnersdoelen/">Home</a>
       </div><!-- .container -->
       <?php
