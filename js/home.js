@@ -83,7 +83,7 @@ new Vue({
 
     // If the user can hover, they can scroll through probably
     supportsHover() {
-      return matchMedia('(any-hover: hover)')
+      return matchMedia('(any-hover: hover)').matches
     },
     goalHandle() {
       return this.supportsHover ? undefined : '.goal-handle'
