@@ -33,6 +33,8 @@ if (!$data) {
 
     <h1>Leerdoelen van <strong><?php esc_html_e($data->value->author ?? $data->author) ?></strong></h1>
 
+    <p>Wat kun je al? Geef jezelf sterren. 1 ster = ik kan het een beetje. 5 sterren = ik kan het heel goed. </p>
+
     <div id="app" v-cloak>
       <div class="goal-card checked" v-for="goal of selection">
         <div class="goal-card__title">
