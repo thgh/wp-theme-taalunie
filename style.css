@@ -2741,6 +2741,7 @@ a .bundel-mini:focus {
   padding-left: 15px;
   padding-right: 15px;
 }
+.page-template-page-mijn-doelen .site-content,
 .page-template-page-doelen-wizard .site-content,
 .post-type-archive-taak .site-content {
   padding: 0;
