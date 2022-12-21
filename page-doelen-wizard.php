@@ -38,9 +38,9 @@ get_header();
         <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in nederland.svg"
           alt="">
       </a>
-      <a class="modal-option" href="/?ik=leren&regio=be" @click="visit">
+      <a class="modal-option" href="/?ik=leren&regio=be" @click.prevent="alertBE">
         <div class="modal-option__text">
-          Ik woon in België.
+          Ik woon in België. (onder constructie)
         </div>
         <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik woon in belgie.svg"
           alt="">
