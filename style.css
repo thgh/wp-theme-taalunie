@@ -142,9 +142,10 @@ main {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
-  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
   font-size: 2em;
   margin: 0.67em 0;
 }
@@ -706,10 +707,9 @@ textarea {
   background-color: #08234e;
   color: white;
 
-  font: 16px/1.6 'Kievit', Georgia, Arial, -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji' !important;
+  font: 16px/1.6 'Kievit', Georgia, Arial, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
 
   /* Mobile */
   position: relative;
@@ -792,8 +792,8 @@ textarea {
   margin: 10px;
 
   background: rgba(0, 0, 0, 0.1);
-  font: Kievit, Georgia, Arial, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+  font: Kievit, Georgia, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
   font-weight: bold;
   text-shadow: 0 1px 10px white;
@@ -1768,10 +1768,13 @@ h3 {
   font-size: 20px;
   line-height: 24px;
 }
-h1, h2, h3 {
-  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+h1,
+h2,
+h3 {
+  font-family: Montserrat, 'Kievit', Georgia, Arial, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
 .site-content {
@@ -2652,90 +2655,91 @@ a .bundel-mini:focus {
 
 /* NT2 beginnersdoelen content */
 
-.wp-block-group.has-background, .wp-block-columns.has-background {
-    margin-left: -15px;
-    margin-right: -15px;
+.wp-block-group.has-background,
+.wp-block-columns.has-background {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .wp-block-columns.has-background {
-    padding-top: 20px;
-    padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .has-background .wp-block-column {
-    background: white;
-    padding: 1px 20px 20px;
-    box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
+  background: white;
+  padding: 1px 20px 20px;
+  box-shadow: 4px 8px 12px 0 rgba(8, 35, 78, 0.1);
 }
 
 @media (min-width: 1130px) {
-    .wp-block-group.has-background, .wp-block-columns.has-background {
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin-left: calc(550px - 50vw);
-        padding-left: calc(50vw - 550px);
-        margin-right: calc(550px - 50vw);
-        padding-right: calc(50vw - 550px);
-    }
+  .wp-block-group.has-background,
+  .wp-block-columns.has-background {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: calc(550px - 50vw);
+    padding-left: calc(50vw - 550px);
+    margin-right: calc(550px - 50vw);
+    padding-right: calc(50vw - 550px);
+  }
 
-    .wp-block-columns.has-background {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
+  .wp-block-columns.has-background {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 }
 
-
 .catalogus-link {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 700px) {
-    .has-catalogus-link {
-        display: flex;
-    }
+  .has-catalogus-link {
+    display: flex;
+  }
 
-    .has-catalogus-link .site-branding {
-        flex-grow: 1;
-    }
+  .has-catalogus-link .site-branding {
+    flex-grow: 1;
+  }
 
-    body .catalogus-link {
-        padding-left: 24px;
-        padding-right: 15px;
-        margin-right: -15px;
-        justify-content: center;
-        align-items: center;
-        color: #182B49;
-    }
+  body .catalogus-link {
+    padding-left: 24px;
+    padding-right: 15px;
+    margin-right: -15px;
+    justify-content: center;
+    align-items: center;
+    color: #182b49;
+  }
 
-    .catalogus-link::after {
-        width: 24px;
-        height: 24px;
-        display: block;
-        margin-left: 12px;
-        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23182B49' d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z' /%3E%3C/svg%3E");
-    }
+  .catalogus-link::after {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin-left: 12px;
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23182B49' d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z' /%3E%3C/svg%3E");
+  }
 
-    .page-template-default .catalogus-leren {
-        display: flex;
-    }
+  .page-template-default .catalogus-leren {
+    display: flex;
+  }
 
-    .page-template-page-doelen-wizard .catalogus-begeleider {
-        display: flex;
-        color: white;
-    }
+  .page-template-page-doelen-wizard .catalogus-begeleider {
+    display: flex;
+    color: white;
+  }
 
-    .page-template-page-doelen-wizard .catalogus-begeleider::after {
-        transform: rotate(-90deg);
-    }
+  .page-template-page-doelen-wizard .catalogus-begeleider::after {
+    transform: rotate(-90deg);
+  }
 
-    .no-catalogus-link .catalogus-link {
-	display: none
-    }
+  .no-catalogus-link .catalogus-link {
+    display: none;
+  }
 }
 
 .site-content {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .page-template-page-doelen-wizard .site-content,
 .post-type-archive-taak .site-content {
@@ -2748,39 +2752,39 @@ a .bundel-mini:focus {
   font-weight: 600;
   font-family: montserrat, sans-serif;
   line-height: 1em;
-  padding-top: .667em;
-  padding-bottom: .667em;
+  padding-top: 0.667em;
+  padding-bottom: 0.667em;
 }
-	
+
 .has-siblings {
   display: flex;
 }
 
 @media (max-width: 699px) {
   .has-siblings {
-      flex-direction: column;
+    flex-direction: column;
   }
 
-  .has-siblings>.page {
-      order: -1
+  .has-siblings > .page {
+    order: -1;
   }
 
   .siblings {
-      flex-basis: 40%;
-      margin: 0;
-      padding: 0 0 60px;
+    flex-basis: 40%;
+    margin: 0;
+    padding: 0 0 60px;
   }
 }
 
 @media (min-width: 700px) {
-  .has-siblings>.page {
-      flex-basis: 60%;
+  .has-siblings > .page {
+    flex-basis: 60%;
   }
 
   .siblings {
-      flex-basis: 40%;
-      margin: 0;
-      padding: 112px 25px 100px 0;
+    flex-basis: 40%;
+    margin: 0;
+    padding: 112px 25px 100px 0;
   }
 }
 
@@ -2790,8 +2794,8 @@ a .bundel-mini:focus {
 
 .siblings a {
   display: block;
-  padding: .3em 0;
-  color: #182B49;
+  padding: 0.3em 0;
+  color: #182b49;
   font-family: Montserrat;
   font-size: 16px;
   line-height: 25px;
