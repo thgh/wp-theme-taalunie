@@ -1529,8 +1529,15 @@ html {
   outline: none;
   background-color: #dbe8eb;
 }
-.goal-group {
-  cursor: move;
+@media (any-hover: none) {
+  .goal-handle {
+    cursor: move;
+  }
+}
+@media (any-hover: hover) {
+  .goal-group {
+    cursor: move;
+  }
 }
 
 .goal-card__icon {

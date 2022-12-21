@@ -80,6 +80,14 @@ new Vue({
     ids() {
       return this.selection.map((g) => g.id)
     },
+
+    // If the user can hover, they can scroll through probably
+    supportsHover() {
+      return matchMedia('(any-hover: hover)')
+    },
+    goalHandle() {
+      return this.supportsHover ? undefined : '.goal-handle'
+    },
   },
   methods: {
     childrenByCategory(parent) {

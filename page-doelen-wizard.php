@@ -144,7 +144,7 @@ get_header();
 
       <div class="row">
         <div class="col-md-8">
-          <draggable tag="div" class="goal-group" v-model="selection" @start="drag=true" @end="drag=false"
+          <draggable tag="div" class="goal-group" :handle="goalHandle" v-model="selection" @start="drag=true" @end="drag=false"
             v-bind="{animation:400}">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
               <div class="goal-card checked" v-for="goal of selection" :key="goal.id">
