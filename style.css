@@ -1808,10 +1808,11 @@ h3 {
 }
 
 .modal-option {
-  flex: 1;
+  flex: 1 1 20%;
   margin: 16px;
   aspect-ratio: 1/1;
   outline: 1px solid #ccc;
+  border: 0;
   border-radius: 6px;
   text-align: center;
   font-weight: 600;
@@ -1819,6 +1820,7 @@ h3 {
   flex-direction: column;
   color: inherit !important;
   text-decoration: inherit;
+  background-color: white;
 }
 .modal-option:hover {
   outline: 1px solid #000;

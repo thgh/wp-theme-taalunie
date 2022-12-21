@@ -208,7 +208,7 @@ get_header();
             </svg>
           </div>
           <div class="modal-option__text">
-            Ik wil andere domeinen toevoegen.
+            Klik hier als je meer doelen wil kiezen.
           </div>
         </a>
         <button class="modal-option" @click="finish">
@@ -220,7 +220,7 @@ get_header();
             </svg>
           </div>
           <div class="modal-option__text">
-            Ik ben klaar met kiezen en wil afronden.
+            Klik hier als je klaar bent met kiezen.
           </div>
         </button>
       </div>
