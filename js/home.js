@@ -166,6 +166,10 @@ new Vue({
       }
     },
     async finish() {
+      if (!this.selection || !this.selection.length) {
+        return alert('Kies minstens één doel!')
+      }
+
       if (this.saving) return
       this.saving = true
       try {
