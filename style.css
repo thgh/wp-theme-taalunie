@@ -733,6 +733,11 @@ textarea {
   z-index: 99999;
   /* 10px padding on parent - 20px padding on child */
   margin-left: -10px;
+
+  background-color: #182b49;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 1.4em;
 }
 
 .main-navigation ul ul ul {
@@ -752,8 +757,6 @@ textarea {
 
   /* Taalunie custom */
   flex-direction: column;
-  background: #fff;
-  color: black;
 }
 
 .main-navigation li {
@@ -767,22 +770,22 @@ textarea {
   padding: 16px 10px;
 }
 .main-navigation a:hover {
-  text-decoration: underline;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #00b0ca;
 }
 
 .main-navigation ul ul a {
   min-width: 350px;
-  padding: 8px 20px;
+  padding: 12px 20px;
   line-height: 1.2em;
 }
 .main-navigation ul ul li:first-child a {
-  max-width: 350px;
-  padding: 8px 20px;
-  line-height: 1.2em;
+  padding-top: 20px;
+}
+.main-navigation ul ul li:last-child a {
+  padding-bottom: 20px;
 }
 .main-navigation ul ul a:hover {
-  background-color: #eee;
+  background-color: #00b0ca;
 }
 
 .menu-toggle {
@@ -2793,11 +2796,11 @@ a .bundel-mini:focus {
 
 .siblings a {
   display: block;
-  padding: 0.3em 0;
+  padding: 0.5em 0;
   color: #182b49;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-size: 16px;
-  line-height: 25px;
+  line-height: 1.4em;
   font-weight: 500;
 }
 
