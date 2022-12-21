@@ -2732,15 +2732,6 @@ a .bundel-mini:focus {
     display: flex;
   }
 
-  .page-template-page-doelen-wizard .catalogus-begeleider {
-    display: flex;
-    color: white;
-  }
-
-  .page-template-page-doelen-wizard .catalogus-begeleider::after {
-    transform: rotate(-90deg);
-  }
-
   .no-catalogus-link .catalogus-link {
     display: none;
   }
