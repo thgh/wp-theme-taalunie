@@ -67,10 +67,13 @@ new Vue({
       if (!this.region) return this.allGoals
       if (!this.regionsPromise) setTimeout(() => this.loadRegions())
       if (!this.regions) return this.allGoals
-      const region = this.regions.find(r => r.slug === this.region)
+      const region = this.regions.find((r) => r.slug === this.region)
       if (!region) return this.allGoals
       const regionId = region.id
-      return this.allGoals.filter(goal => !goal.region || !goal.region.length || goal.region.includes(regionId))
+      return this.allGoals.filter(
+        (goal) =>
+          !goal.region || !goal.region.length || goal.region.includes(regionId)
+      )
     },
 
     // Selection
@@ -86,7 +89,9 @@ new Vue({
       return this.regionGoals.filter((g) => g.categories.includes(c.id))
     },
     async loadCategories() {
-      this.categoriesPromise = wpFetch('/wp-json/wp/v2/categories?per_page=1000')
+      this.categoriesPromise = wpFetch(
+        '/wp-json/wp/v2/categories?per_page=1000'
+      )
       this.categories = await this.categoriesPromise
       persist('categories', this.categories)
     },
@@ -127,8 +132,10 @@ new Vue({
 
       if (!back) window.history.pushState({}, '', url)
     },
-    alertBE(){
-      alert('Aan de Vlaamse versie van de leerdoelencatalogus wordt op dit moment hard gewerkt. We plaatsen die zo snel mogelijk online.')
+    alertBE() {
+      alert(
+        'Aan de Vlaamse versie van de leerdoelencatalogus wordt op dit moment hard gewerkt. We plaatsen die zo snel mogelijk online.'
+      )
     },
 
     // Selection
@@ -212,10 +219,9 @@ new Vue({
       },
       false
     )
-    
-    
-      if (this.region) document.body.classList.remove('no-catalogus-link')
-      else document.body.classList.add('no-catalogus-link')
+
+    if (this.region) document.body.classList.remove('no-catalogus-link')
+    else document.body.classList.add('no-catalogus-link')
   },
   watch: {
     ik(wil) {
@@ -223,7 +229,7 @@ new Vue({
     },
     region(r) {
       if (r && !this.categoriesPromise) this.loadCategories()
-      
+
       if (r) document.body.classList.remove('no-catalogus-link')
       else document.body.classList.add('no-catalogus-link')
     },
