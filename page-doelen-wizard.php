@@ -102,7 +102,7 @@ get_header();
           <div class="category-section" v-for="child in categoryChildren" :id="child.slug">
             <h3 class="category-section-subtitle" v-if="!child.children.length">{{child.name}}</h3>
             <h3 class="category-section-title" v-else>{{child.name}}</h3>
-            <p class="category-section-lead">Ik wil...</p>
+            <p class="category-section-lead" v-if="!child.goals.length">Ik wil...</p>
             <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of child.goals">
               <div class="goal-card__title">
                 <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
@@ -114,7 +114,7 @@ get_header();
 
             <div class="category-section" v-for="grandchild in child.children" :id="grandchild.slug">
               <h3 class="category-section-subtitle">{{grandchild.name}}</h3>
-              <p class="category-section-lead">Ik wil...</p>
+              <p class="category-section-lead"  v-if="!grandchild.goals.length">Ik wil...</p>
               <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of grandchild.goals">
                 <div class="goal-card__title">
                   <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
