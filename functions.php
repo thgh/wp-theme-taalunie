@@ -26,7 +26,7 @@ if (function_exists('acf_add_options_page')) {
 
 if (!defined('hsn_theme_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('hsn_theme_VERSION', '5');
+    define('hsn_theme_VERSION', '6');
 }
 
 if (!function_exists('hsn_theme_setup')):
