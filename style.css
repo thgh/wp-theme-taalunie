@@ -1396,6 +1396,10 @@ html {
   color: #182b49;
   margin-bottom: 20px;
 }
+.category-section-lead {
+  margin: -10px 0 10px;
+  font-weight: 600;
+}
 
 .goal-card {
   display: block;
