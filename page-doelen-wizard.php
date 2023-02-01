@@ -146,6 +146,7 @@ get_header();
 
       <div class="row">
         <div class="col-md-8">
+          <p class="category-section-lead" v-if="selection.length">Ik wil...</p>
           <draggable tag="div" class="goal-group" :handle="goalHandle" v-model="selection" @start="drag=true" @end="drag=false"
             v-bind="{animation:400}">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
@@ -169,7 +170,7 @@ get_header();
           <form class="goal-card checked" @submit.prevent="add(title)">
             <div class="goal-card__title">
               <div class="goal-handle"></div>
-              <input type="text" placeholder="Ik kan..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
+              <input type="text" placeholder="Ik wil..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
                 <button type="submit" class="goal-add" :disabled="!title">Voeg toe</button>
             </div>
           </form>
