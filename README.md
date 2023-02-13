@@ -1,3 +1,3 @@
-# nt2-beginnersdoelen-theme
+# nt2-leerdoelen-theme
 
-Wordpress thema voor Taalunie NT2-Beginnersdoelen
+Wordpress thema voor Taalunie [NT2-leerdoelen.org](https://nt2-leerdoelen.org)
