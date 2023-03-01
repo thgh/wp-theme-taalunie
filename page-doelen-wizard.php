@@ -95,7 +95,7 @@ get_header();
         </div>
         <div class="col-md-8 mt-1">
           <label class="goal-card" v-for="goal of categoryGoals">
-            <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+            <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal, [category])" />
             {{goal.title.rendered}}
           </label>
 
@@ -105,7 +105,7 @@ get_header();
             <p class="category-section-lead" v-if="child.goals.length">Ik wil...</p>
             <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of child.goals">
               <div class="goal-card__title">
-                <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+                <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal, [category, child])" />
                 {{goal.title.rendered}}
               </div>
               <div class="goal-card__content" v-if="goal.content.rendered" v-html="goal.content.rendered">
@@ -117,7 +117,7 @@ get_header();
               <p class="category-section-lead"  v-if="grandchild.goals.length">Ik wil...</p>
               <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of grandchild.goals">
                 <div class="goal-card__title">
-                  <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal)" />
+                  <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal, [category, child, grandchild])" />
                   {{goal.title.rendered}}
                 </div>
                 <div class="goal-card__content" v-if="goal.content.rendered" v-html="goal.content.rendered">

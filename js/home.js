@@ -147,7 +147,7 @@ new Vue({
     },
 
     // Selection
-    toggle(goal) {
+    toggle(goal, categories = []) {
       if (this.ids.includes(goal.id)) {
         this.selection = this.selection.filter((g) => g.id !== goal.id)
       } else
@@ -155,6 +155,13 @@ new Vue({
           id: goal.id,
           title: goal.title.rendered,
           content: goal.content.rendered,
+          categories: categories.map((c) => ({
+            id: c.id,
+            link: c.link,
+            name: c.name,
+            slug: c.slug,
+            thumb: c.thumb || undefined,
+          })),
         })
     },
     next() {
@@ -211,8 +218,8 @@ new Vue({
       )
       this.draggable = 2
     },
-    add(title) {
-      this.selection.push({ id: Math.random(), title })
+    add(title, categories = []) {
+      this.selection.push({ id: Math.random(), title, categories })
       this.title = ''
       const elem = document.querySelector('#addgoaltitle')
       if (elem) elem.focus()
