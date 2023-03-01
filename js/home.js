@@ -1,6 +1,113 @@
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
+const log = (...args) => console.log(...JSON.parse(JSON.stringify(args)))
+
+const html = String.raw
+Vue.component('sortable-selection', {
+  props: ['category', 'goals'],
+  template: html`<section>
+    <div class="category-section-thumbed" v-if="category.thumb">
+      <img :src="category.thumb" class="category-section-thumb" />
+      <h3 class="category-section-subtitle">{{category.name}}</h3>
+    </div>
+    <h3 v-else class="category-section-subtitle">{{category.name}}</h3>
+    <p class="category-section-lead" v-if="goals.length">Ik wil...</p>
+    <draggable
+      tag="div"
+      class="goal-group"
+      :handle="$parent.goalHandle"
+      v-model="goals"
+      @change="$emit('change', goals)"
+      @start="drag=true"
+      @end="drag=false"
+      v-bind="{animation:400}"
+    >
+      <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+        <div class="goal-card checked" v-for="goal of goals" :key="goal.id">
+          <div class="goal-card__title">
+            <div class="goal-handle">=</div>
+            <div class="goal-body">
+              <div
+                class="goal-categories"
+                v-if="goal.categories && goal.categories.length > 1"
+              >
+                <span
+                  v-for="(category, index) of goal.categories.slice(1)"
+                  :key="category.id"
+                >
+                  <span v-if="index"> / </span>
+                  {{category.name}}
+                </span>
+              </div>
+              <div class="goal-title">{{goal.title}}</div>
+            </div>
+            <button
+              class="goal-remove"
+              @mousedown.stop
+              @click.stop.prevent="toggle(goal)"
+            >
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path
+                  fill="#08234E"
+                  d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="goal-card__content"
+            v-if="goal.content"
+            v-html="goal.content"
+          ></div>
+        </div>
+      </transition-group>
+    </draggable>
+
+    <form class="goal-card checked" @submit.prevent="add(title)">
+      <div class="goal-card__title">
+        <div class="goal-handle"></div>
+        <div class="goal-extra-field">
+          <div class="goal-extra-label">
+            Wil je nog een eigen doel toevoegen?
+          </div>
+          <input
+            type="text"
+            placeholder="Ik wil..."
+            class="goal-extra-input flex-grow-1"
+            v-model="title"
+            id="addgoaltitle"
+            ref="add"
+          />
+        </div>
+        <button type="submit" class="goal-add" :disabled="!title">
+          Voeg toe
+        </button>
+      </div>
+    </form>
+  </section>`,
+  data() {
+    return {
+      drag: false,
+      title: '',
+    }
+  },
+  methods: {
+    add() {
+      this.$parent.selection.push({
+        id: Math.random(),
+        title: this.title,
+        categories: [this.category],
+      })
+      this.title = ''
+      if (this.$refs.add) this.$refs.add.focus()
+    },
+  },
+  mounted() {
+    if (!this.value) this.$emit('change', {})
+  },
+})
+
 new Vue({
   el: '#app',
   data() {
@@ -80,16 +187,36 @@ new Vue({
     ids() {
       return this.selection.map((g) => g.id)
     },
+    // Group the selection by first category
+    selectionGroups() {
+      const groups = {}
+      this.selection.forEach((goal) => {
+        const category = goal.categories
+          ? goal.categories[0]
+          : { name: 'Andere doelen' }
+        if (!groups[category.name])
+          groups[category.name] = { id: category.name, category, goals: [] }
+        groups[category.name].goals.push(goal)
+      })
+      return groups
+    },
 
     // If the user can hover, they can scroll through probably
     supportsHover() {
       return matchMedia('(any-hover: hover)').matches
     },
     goalHandle() {
-      return this.supportsHover ? undefined : '.goal-handle'
+      return this.supportsHover ? '.goal-card' : '.goal-handle'
     },
   },
   methods: {
+    setGroup(category, goals) {
+      this.selection = Object.values(this.selectionGroups)
+        .map((group) =>
+          category.name === group.category.name ? goals : group.goals
+        )
+        .flat()
+    },
     childrenByCategory(parent) {
       return this.categories.filter((c) => c.parent === parent.id)
     },

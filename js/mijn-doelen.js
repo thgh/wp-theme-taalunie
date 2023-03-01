@@ -21,6 +21,20 @@ new Vue({
       editing: false,
     }
   },
+  computed: {
+    groups() {
+      const groups = {}
+      this.selection.forEach((goal) => {
+        const category = goal.categories
+          ? goal.categories[0]
+          : { name: 'Andere doelen' }
+        if (!groups[category.name])
+          groups[category.name] = { id: category.name, category, goals: [] }
+        groups[category.name].goals.push(goal)
+      })
+      return groups
+    },
+  },
   methods: {
     async set(goal, score) {
       if (!this.writekey) return alert('Je kan geen aanpassingen maken.')

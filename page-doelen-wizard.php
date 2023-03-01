@@ -146,34 +146,7 @@ get_header();
 
       <div class="row">
         <div class="col-md-8">
-          <p class="category-section-lead" v-if="selection.length">Ik wil...</p>
-          <draggable tag="div" class="goal-group" :handle="goalHandle" v-model="selection" @start="drag=true" @end="drag=false"
-            v-bind="{animation:400}">
-            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-              <div class="goal-card checked" v-for="goal of selection" :key="goal.id">
-                <div class="goal-card__title">
-                  <div class="goal-handle">=</div>
-                  <div class="flex-grow-1">{{goal.title}}</div>
-                  <button class="goal-remove" @mousedown.stop @click.stop.prevent="toggle(goal)">
-                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                      <path fill="#08234E" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/>
-                    </svg>
-                  </button>
-                </div>
-                <div class="goal-card__content" v-if="goal.content" v-html="goal.content"></div>
-              </div>
-            </transition-group>
-          </draggable>
-
-          <h3 class="category-section-subtitle"> Wil je nog een eigen doel toevoegen? </h3>
-
-          <form class="goal-card checked" @submit.prevent="add(title)">
-            <div class="goal-card__title">
-              <div class="goal-handle"></div>
-              <input type="text" placeholder="Ik wil..." class="flex-grow-1" v-model="title" id="addgoaltitle" />
-                <button type="submit" class="goal-add" :disabled="!title">Voeg toe</button>
-            </div>
-          </form>
+          <sortable-selection :category="group.category" :goals="group.goals" @change="setGroup(group.category, $event)" v-for="group of selectionGroups" :key="group.id"></sortable-selection>
         </div>
         <div class="col-md-4 d-none d-md-block">
           <img loading="lazy" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/Computer bibliotheek online_computer leerders.png" />
