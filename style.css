@@ -1525,6 +1525,9 @@ section > .goal-card:last-child {
 .goal-extra-field {
   flex-grow: 1;
 }
+.goal-extra-input {
+  width: 100%;
+}
 
 .goal-add {
   margin-left: 1.5em;

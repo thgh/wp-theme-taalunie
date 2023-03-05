@@ -5,26 +5,30 @@ const log = (...args) => console.log(...JSON.parse(JSON.stringify(args)))
 
 const html = String.raw
 Vue.component('sortable-selection', {
-  props: ['category', 'goals'],
+  props: ['group'],
   template: html`<section>
-    <div class="category-section-thumbed" v-if="category.thumb">
-      <img :src="category.thumb" class="category-section-thumb" />
-      <h3 class="category-section-subtitle">{{category.name}}</h3>
+    <div class="category-section-thumbed" v-if="group.category.thumb">
+      <img :src="group.category.thumb" class="category-section-thumb" />
+      <h3 class="category-section-subtitle">{{group.category.name}}</h3>
     </div>
-    <h3 v-else class="category-section-subtitle">{{category.name}}</h3>
-    <p class="category-section-lead" v-if="goals.length">Ik wil...</p>
+    <h3 v-else class="category-section-subtitle">{{group.category.name}}</h3>
+    <p class="category-section-lead" v-if="group.goals.length">Ik wil...</p>
     <draggable
       tag="div"
       class="goal-group"
       :handle="$parent.goalHandle"
-      v-model="goals"
-      @change="$emit('change', goals)"
+      :value="group.goals"
+      @input="$emit('goals', $event)"
       @start="drag=true"
       @end="drag=false"
       v-bind="{animation:400}"
     >
       <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-        <div class="goal-card checked" v-for="goal of goals" :key="goal.id">
+        <div
+          class="goal-card checked"
+          v-for="goal of group.goals"
+          :key="goal.id"
+        >
           <div class="goal-card__title">
             <div class="goal-handle">=</div>
             <div class="goal-body">
@@ -198,6 +202,7 @@ new Vue({
           groups[category.name] = { id: category.name, category, goals: [] }
         groups[category.name].goals.push(goal)
       })
+      // log('groups', groups, this.selection)
       return groups
     },
 
@@ -210,11 +215,10 @@ new Vue({
     },
   },
   methods: {
-    setGroup(category, goals) {
+    setGroup(group, goals) {
+      // log('setGroup', this.selection, this.selectionGroups, group.goals, goals)
       this.selection = Object.values(this.selectionGroups)
-        .map((group) =>
-          category.name === group.category.name ? goals : group.goals
-        )
+        .map((g) => (g.category.name === group.category.name ? goals : g.goals))
         .flat()
     },
     childrenByCategory(parent) {

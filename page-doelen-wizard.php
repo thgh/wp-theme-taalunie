@@ -146,7 +146,7 @@ get_header();
 
       <div class="row">
         <div class="col-md-8">
-          <sortable-selection :category="group.category" :goals="group.goals" @change="setGroup(group.category, $event)" v-for="group of selectionGroups" :key="group.id"></sortable-selection>
+          <sortable-selection :group="group" @goals="setGroup(group, $event)" v-for="group of selectionGroups" :key="group.id"></sortable-selection>
         </div>
         <div class="col-md-4 d-none d-md-block">
           <img loading="lazy" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/Computer bibliotheek online_computer leerders.png" />
