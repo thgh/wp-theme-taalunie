@@ -101,14 +101,11 @@ Vue.component('sortable-selection', {
       this.$parent.selection.push({
         id: Math.random(),
         title: this.title,
-        categories: [this.category],
+        categories: [this.group.category],
       })
       this.title = ''
       if (this.$refs.add) this.$refs.add.focus()
     },
-  },
-  mounted() {
-    if (!this.value) this.$emit('change', {})
   },
 })
 
@@ -198,6 +195,7 @@ new Vue({
         const category = goal.categories
           ? goal.categories[0]
           : { name: 'Andere doelen' }
+        if (!category || !category.name) return
         if (!groups[category.name])
           groups[category.name] = { id: category.name, category, goals: [] }
         groups[category.name].goals.push(goal)
