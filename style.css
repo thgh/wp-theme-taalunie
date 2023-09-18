@@ -553,6 +553,7 @@ li > ul,
 li > ol {
   margin-bottom: 0;
   margin-left: 1.5em;
+  padding-left: 0;
 }
 
 dt {
@@ -2848,7 +2849,6 @@ a .bundel-mini:focus {
   display: block;
   padding: 0.5em 0;
   color: #182b49;
-  font-family: Montserrat, sans-serif;
   font-size: 16px;
   line-height: 1.4em;
   font-weight: 500;

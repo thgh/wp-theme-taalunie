@@ -123,6 +123,7 @@ new Vue({
       allGoals: stale('allGoals') || [],
       categories: stale('categories') || [],
       selection: stale('selection') || [],
+      regions: stale('regions') || [],
       draggable: false,
       drag: false,
       title: '',

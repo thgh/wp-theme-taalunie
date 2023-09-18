@@ -87,7 +87,7 @@ get_header();
               <a :href="'#' + child.slug">{{child.name}}</a>
             </h3>
             <ul class="nav-subcategories">
-              <li v-for="grandchild in child.children" class="nav-subcategory">
+              <li v-for="grandchild in child.children" class="nav-subcategory" v-if="grandchild.goals.length">
                 <a :href="'#' + grandchild.slug">{{grandchild.name}}</a>
               </li>
             </ul>
@@ -113,8 +113,8 @@ get_header();
             </label>
 
             <div class="category-section" v-for="grandchild in child.children" :id="grandchild.slug">
-              <h3 class="category-section-subtitle">{{grandchild.name}}</h3>
-              <p class="category-section-lead"  v-if="grandchild.goals.length">Ik wil...</p>
+              <h3 class="category-section-subtitle" v-if="grandchild.goals.length">{{grandchild.name}}</h3>
+              <p class="category-section-lead" v-if="grandchild.goals.length">Ik wil...</p>
               <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of grandchild.goals">
                 <div class="goal-card__title">
                   <input type="checkbox" :checked="ids.includes(goal.id)" @change="toggle(goal, [category, child, grandchild])" />
