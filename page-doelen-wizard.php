@@ -100,8 +100,8 @@ get_header();
           </label>
 
           <div class="category-section" v-for="child in categoryChildren" :id="child.slug">
-            <h3 class="category-section-subtitle" v-if="!child.children.length">{{child.name}}</h3>
-            <h3 class="category-section-title" v-else>{{child.name}}</h3>
+            <h3 class="category-section-title" v-if="child.children.length">{{child.name}}</h3>
+            <h3 class="category-section-subtitle" v-else-if="child.goals.length">{{child.name}}</h3>
             <p class="category-section-lead" v-if="child.goals.length">Ik wil...</p>
             <label class="goal-card" :class="{checked:ids.includes(goal.id)}" v-for="goal of child.goals">
               <div class="goal-card__title">

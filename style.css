@@ -1385,6 +1385,9 @@ html {
   color: #56af89;
 }
 
+.category-section + .category-section {
+  margin-top: 30px;
+}
 .category-section-thumbed {
   display: flex;
   align-items: center;
