@@ -83,7 +83,7 @@ get_header();
       <div class="row">
         <div class="nav-sticky col-md-4 d-none d-md-block" :class="{'nav-sticky--low':selection.length}">
           <div v-for="child in categoryChildren">
-            <h3 class="nav-category">
+            <h3 class="nav-category" v-if="child.children.length || child.goals.length">
               <a :href="'#' + child.slug">{{child.name}}</a>
             </h3>
             <ul class="nav-subcategories">

@@ -592,7 +592,7 @@ table {
 /* Links
 --------------------------------------------- */
 a {
-  color: #56af89;
+  color: #05a1c6;
 }
 
 a:hover,
@@ -1363,7 +1363,7 @@ html {
   font-weight: 600;
 }
 .nav-category > a:hover {
-  color: #56af89;
+  color: #05a1c6;
 }
 .nav-subcategories {
   font: inherit;
@@ -1382,7 +1382,7 @@ html {
   text-decoration: underline;
 }
 .nav-subcategory > a:hover {
-  color: #56af89;
+  color: #05a1c6;
 }
 
 .category-section + .category-section {
@@ -2199,7 +2199,7 @@ a .bundel-mini:focus {
   font-stretch: normal;
   line-height: 1.5;
   letter-spacing: normal;
-  color: #56af89;
+  color: #05a1c6;
 }
 .article-mini__num {
   float: right;
@@ -2214,7 +2214,7 @@ a .bundel-mini:focus {
   font-stretch: normal;
   text-align: center;
   background-color: #ffffff;
-  color: #56af89;
+  color: #05a1c6;
 }
 .article-mini__bundel {
   float: left;
@@ -2278,7 +2278,7 @@ a .bundel-mini:focus {
 
 .site-intro .post-edit-link {
   display: inline-block;
-  background: #56af89;
+  background: #05a1c6;
   color: white;
   border-radius: 6px;
   padding: 6px 15px;
