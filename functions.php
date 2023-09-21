@@ -164,9 +164,9 @@ function taak_query_sort_asc($query)
         $query->set('order', 'ASC');
         $query->set('posts_per_page', 30);
     }
-    if (isset($query->query['post_types']) && $query->query['post_types'] === 'taak') {
-        $query->set('order', 'ASC');
-        $query->set('posts_per_page', 30);
+    if (isset($query->query['post_type']) && $query->query['post_type'] === 'doel') {
+            $query->set( 'orderby', 'menu_order' );
+            $query->set( 'order', 'ASC' );
     }
 };
 
