@@ -15,18 +15,18 @@ get_header();
     <div class="modal-options">
       <a class="modal-option" href="/?ik=leren" @click="visit">
         <div class="modal-option__text">
-          Ik leer Nederlands.
-        </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben leerder.svg"
-          alt="">
-      </a>
-      <a class="modal-option" href="/nt2-leerdoelen/">
-        <div class="modal-option__text">
-          Ik ben begeleider.
-        </div>
-        <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben begeleider.svg"
-          alt="">
-      </a>
+            Ik leer Nederlands.
+          </div>
+          <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben leerder.svg"
+            alt="">
+        </a>
+        <a class="modal-option" href="/nt2-leerdoelen/">
+          <div class="modal-option__text">
+            Ik ben begeleider.
+          </div>
+          <img class="modal-option__img" src="<?php echo esc_url( get_template_directory_uri()) ?>/img/ik ben begeleider.svg"
+            alt="">
+        </a>
     </div>
   </div>
   <div class="modal-body" v-else-if="!region" v-cloak>
@@ -204,6 +204,14 @@ get_header();
   </div>
   <div v-else v-cloak>
     Step={{step}}
+  </div>
+  <div class="container container--tight no-entry-header">
+    <?php
+    while ( have_posts() ):
+      the_post();
+      get_template_part( 'template-parts/content', 'page' );
+    endwhile;
+    ?>
   </div>
 </div>
 
